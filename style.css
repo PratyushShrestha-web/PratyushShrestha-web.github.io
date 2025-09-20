@@ -1,38 +1,57 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: Georgia, serif;
   margin: 0;
-  padding: 0;
-  background: #f4f4f4;
+  padding: 2rem;
+  background: #eae7dc; /* light beige paper-like */
   color: #333;
 }
 
+.paper {
+  background: #fffdf5; /* off-white paper */
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
 header {
-  background: #333;
-  color: white;
   text-align: center;
-  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #666;
 }
 
 section {
-  padding: 2rem;
-  margin: 1rem auto;
-  max-width: 800px;
-  background: white;
-  border-radius: 8px;
+  margin-bottom: 2rem;
 }
 
 h2 {
-  border-bottom: 2px solid #333;
-  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #222;
 }
 
-.skills ul {
+ul {
+  padding-left: 1.2rem;
+}
+
+.skills ul, .projects ul {
   list-style: square;
-  padding-left: 1.5rem;
 }
 
 a {
-  color: #0066cc;
+  color: #00509e;
   text-decoration: none;
 }
 
@@ -42,7 +61,8 @@ a:hover {
 
 footer {
   text-align: center;
-  padding: 1rem;
-  background: #222;
-  color: white;
+  font-size: 0.9rem;
+  color: #777;
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
 }
