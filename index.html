@@ -2,56 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pratyush Shrestha - Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Hero Section -->
+ <header class="hero">
+  <h1>Pratyush Shrestha</h1>
+  <h2>Full Stack Engineer</h2>
+  <p>
+    I build scalable, accessible web applications with modern technologies.  
+    Passionate about creating user-centered solutions that drive business results  
+    and deliver exceptional user experiences.
+  </p>
+  <div class="tags">
+    <span><span class="dot green"></span> Available for hire</span>
+    <span><span class="dot gray"></span> Remote worldwide</span>
+    <!--<span> <span class="dot black"></span> 5+ years experience</span>-->
+  </div>
+</header>
 
-  <div class="paper">
-    <header>
-      <h1>Pratyush Shrestha</h1>
-      <p>BSc CSIT - 2nd Semester Student</p>
-    </header>
 
-    <section class="about">
-      <h2>About Me</h2>
-      <p>Hello! I'm Pratyush Shrestha, a Computer Science student currently in my second semester. I enjoy solving problems and learning new technologies. My main programming language is C++.</p>
-      
-    </section>
+  <!-- About Section -->
+ <section class="about">
+  <h2>About</h2>
+  <div class="about-grid">
+    <div class="left">
+      <h3>Experience</h3>
+      <p>
+        Worked as a Frontend developer in an online hackathon 
+      <p>
+        Eager to learn
+      </p>
 
-    <section class="skills">
-      <h2>Skills</h2>
+      <h3>Approach</h3>
+      <p>
+        I believe in writing clean, maintainable code that scales. My focus is on delivering 
+        business value while maintaining high code quality and performance standards.
+      </p>
+      <p>
+        Strong advocate for accessibility, testing, and documentation. I enjoy mentoring 
+        contributing to open-source projects.
+      </p>
+    </div>
+
+    <div class="right">
+      <h3>Key Achievements</h3>
       <ul>
-        <li>C++ Programming</li>
-        <li>Basic Problem Solving</li>
-        <li>OOP Concepts</li>
-        <li>Html</li>
-        <li>CSS</li>
-        <li>React</li>
+       <li>Worked in an online hackathon</li>
+        
       </ul>
-    </section>
 
-    <section class="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li><strong>NEPSOL(React.js)</strong> – An app where transaction is done in solana coins.</li>
-        <a href="https://nepsol.onrender.com">Demo Link</a>
+      <h3>Education & Certifications</h3>
+      <p><strong>B.sc.CSIT</strong><br>
+      Birendra Memorial College,TU affiliated 2024-present</p>
+
     
-      </ul>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <section class="contact">
-      <h2>Contact</h2>
-      <p>Email: <a href="mailto:pratyush.stha.np@gmail.com">pratyush.stha.np@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://www.linkedin.com/in/pratyush-shrestha-239384341" target="_blank">linkedin.com/in/pratyush</a></p>
-      <p>Github: <a href="https://github.com/PratyushShrestha-web">github.com/PratyushShrestha</a></p>
-    </section>
 
-    <footer>
-      <p>&copy; 2025 Pratyush Shrestha</p>
-    </footer>
+  <!-- Skills Section -->
+<section id="skills">
+  <h2>// SKILL_TREE</h2>
+
+  <div class="tab-content active" id="frontend">
+    <div class="skill">
+      <span class="skill-name">React/Next.js</span>
+      <div class="bar"><span style="width:95%"></span></div>
+    </div>
+
+    <div class="skill">
+      <span class="skill-name">HTML</span>
+      <div class="bar"><span style="width:90%"></span></div>
+    </div>
+
+    <div class="skill">
+      <span class="skill-name">Tailwind CSS</span>
+      <div class="bar"><span style="width:88%"></span></div>
+    </div>
   </div>
 
+  <div class="tab-content" id="backend">
+    <div class="skill">
+      <span class="skill-name">Node.js</span>
+      <div class="bar"><span style="width:85%"></span></div>
+    </div>
+
+    <div class="skill">
+      <span class="skill-name">PostgreSQL</span>
+      <div class="bar"><span style="width:80%"></span></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="devops">
+    <div class="skill">
+      <span class="skill-name">Docker</span>
+      <div class="bar"><span style="width:75%"></span></div>
+    </div>
+
+    <div class="skill">
+      <span class="skill-name">AWS</span>
+      <div class="bar"><span style="width:70%"></span></div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>// PROJECT_PORTFOLIO.exe</h2>
+    <div class="projects">
+      <button class="project active" data-project="p1" onclick="window.location.href='https://nepsol.onrender.com'">Transaction Website...</button>
+    
+    </div>
+    <div class="project-details" id="p1">Built the Frontend for the transaction of Solana coins</div>
+    
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>SYSTEM_INFO: Version 2025.9.27 | Build: PRODUCTION | Uptime: 99.9%</p>
+    <p>©2025 Pratyush Shrestha - All rights reserved</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
