@@ -1,127 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pratyush Shrestha</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAYER PROFILE - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Hero Section -->
-  <header class="hero">
-    <h1>Pratyush Shrestha</h1>
-    <h2>Full Stack Engineer</h2>
-    <p>
-      I build scalable, accessible web applications with modern technologies.
-      Passionate about creating user-centered solutions that drive business results
-      and deliver exceptional user experiences.
-    </p>
-    <div class="tags">
-      <span><span class="dot green"></span> Available for hire</span>
-      <span><span class="dot gray"></span> Remote worldwide</span>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">◆ PLAYER PROFILE ◆</div>
+            <div class="player-name">YOUR NAME</div>
+            <div class="tagline">CREATIVE DEVELOPER PORTFOLIO</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Menu Panel -->
+            <div class="menu-panel">
+                <div class="menu-title">▼ MAIN MENU ▼</div>
+                <button class="menu-item active" onclick="showSection('about')">
+                    About
+                </button>
+                <button class="menu-item" onclick="showSection('projects')">
+                    Projects
+                </button>
+                <button class="menu-item" onclick="showSection('resume')">
+                    Resume
+                </button>
+                <button class="menu-item" onclick="showSection('contact')">
+                    Contact
+                </button>
+            </div>
+
+            <!-- Content Panel -->
+            <div class="content-panel">
+                <!-- About Section -->
+                <div id="about" class="content-section active">
+                    <div class="section-title">➤ ABOUT</div>
+                    <div class="section-content">
+                        <p>Welcome to my digital portfolio. I am a creative developer passionate about building interactive experiences and engaging web applications.</p>
+                        
+                        <div class="info-box">
+                            <div class="info-box-title">EXPERIENCE STATS</div>
+                            <div class="stat-bar">
+                                <div class="stat-label">Web Development: </div>
+                                <div class="stat-fill">
+                                    <div class="stat-bar-fill" style="width: 85%;"></div>
+                                </div>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-label">UI/UX Design: </div>
+                                <div class="stat-fill">
+                                    <div class="stat-bar-fill" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                            <div class="stat-bar">
+                                <div class="stat-label">Problem Solving: </div>
+                                <div class="stat-fill">
+                                    <div class="stat-bar-fill" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>With experience across frontend and backend technologies, I specialize in creating responsive, user-friendly interfaces and building robust applications that solve real problems.</p>
+                    </div>
+                </div>
+
+                <!-- Projects Section -->
+                <div id="projects" class="content-section">
+                    <div class="section-title">➤ PROJECTS</div>
+                    <div class="section-content">
+                        <div class="project-item">
+                            <div class="project-title">PROJECT ALPHA</div>
+                            <div class="project-description">
+                                A responsive e-commerce platform featuring advanced filtering, real-time inventory management, and secure payment integration. Built with modern web technologies.
+                            </div>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-title">PROJECT BETA</div>
+                            <div class="project-description">
+                                Interactive data visualization dashboard that transforms complex datasets into actionable insights. Features real-time updates and custom analytics tools.
+                            </div>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-title">PROJECT GAMMA</div>
+                            <div class="project-description">
+                                A collaborative productivity application with real-time synchronization, user authentication, and advanced workflow automation capabilities.
+                            </div>
+                        </div>
+
+                        <div class="project-item">
+                            <div class="project-title">PROJECT DELTA</div>
+                            <div class="project-description">
+                                Mobile-first social platform enabling seamless user interaction with intuitive design, notification systems, and content management features.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resume Section -->
+                <div id="resume" class="content-section">
+                    <div class="section-title">➤ RESUME</div>
+                    <div class="section-content">
+                        <div class="info-box">
+                            <div class="info-box-title">TECHNICAL SKILLS</div>
+                        </div>
+                        
+                        <div class="skill-grid">
+                            <div class="skill-item">HTML5 / CSS3</div>
+                            <div class="skill-item">JavaScript</div>
+                            <div class="skill-item">React</div>
+                            <div class="skill-item">Node.js</div>
+                            <div class="skill-item">TypeScript</div>
+                            <div class="skill-item">Database Design</div>
+                            <div class="skill-item">API Development</div>
+                            <div class="skill-item">Version Control</div>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-box-title">EXPERIENCE</div>
+                            <p><strong>Senior Developer</strong> (2021 - Present)</p>
+                            <p>Led development of multiple client projects, mentored junior developers, and implemented best practices across the team.</p>
+
+                            <p style="margin-top: 15px;"><strong>Full Stack Developer</strong> (2019 - 2021)</p>
+                            <p>Developed full-stack web applications, managed databases, and optimized application performance.</p>
+
+                            <p style="margin-top: 15px;"><strong>Junior Developer</strong> (2018 - 2019)</p>
+                            <p>Started career building responsive websites and learning core development principles.</p>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-box-title">EDUCATION</div>
+                            <p><strong>Computer Science Degree</strong> - University Name (Graduation Year)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Section -->
+                <div id="contact" class="content-section">
+                    <div class="section-title">➤ CONTACT</div>
+                    <div class="section-content">
+                        <p>Feel free to reach out for collaboration opportunities, project inquiries, or just to say hello!</p>
+
+                        <div class="info-box">
+                            <div class="info-box-title">CONTACT INFORMATION</div>
+                            <p><strong>Email:</strong> your.email@example.com</p>
+                            <p><strong>Phone:</strong> (555) 123-4567</p>
+                            <p><strong>Location:</strong> Your City, Country</p>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-box-title">SOCIAL LINKS</div>
+                            <p>LinkedIn: linkedin.com/in/yourprofile</p>
+                            <p>GitHub: github.com/yourprofile</p>
+                            <p>Twitter: @yourhandle</p>
+                            <p>Portfolio: yourwebsite.com</p>
+                        </div>
+
+                        <div class="info-box">
+                            <div class="info-box-title">MESSAGE</div>
+                            <p>I&apos;m always interested in hearing about new projects and opportunities. Don&apos;t hesitate to get in touch!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            ◆ PORTFOLIO v1.0 ◆ | SYSTEM ONLINE | READY FOR CONTACT | GAME OVER? PRESS START TO RESET
+        </div>
     </div>
-  </header>
 
-  <!-- About Section -->
-  <section class="about">
-    <h2>About</h2>
-    <div class="about-grid">
-      <div class="left">
-        <h3>Experience</h3>
-        <p>Worked as a Frontend developer in an online hackathon</p>
-        <p>Eager to learn</p>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
 
-        <h3>Approach</h3>
-        <p>
-          I believe in writing clean, maintainable code that scales. My focus is on delivering
-          business value while maintaining high code quality and performance standards.
-        </p>
-        <p>
-          Strong advocate for accessibility, testing, and documentation. I enjoy mentoring
-          contributing to open-source projects.
-        </p>
-      </div>
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
 
-      <div class="right">
-        <h3>Key Achievements</h3>
-        <ul>
-          <li>Worked in an online hackathon</li>
-        </ul>
+            // Update menu items
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.classList.remove('active');
+            });
 
-        <h3>Education & Certifications</h3>
-        <p><strong>B.sc.CSIT</strong><br>
-        Birendra Memorial College, TU affiliated 2024–present</p>
-      </div>
-    </div>
-  </section>
+            // Add active class to clicked menu item
+            event.target.classList.add('active');
+        }
 
-  <!-- Skills Section -->
-  <section id="skills">
-    <h2>// SKILL_TREE</h2>
-    <div class="tab-content active" id="frontend">
-      <div class="skill">
-        <span class="skill-name">React/Next.js</span>
-        <div class="bar"><span style="width:95%"></span></div>
-      </div>
-      <div class="skill">
-        <span class="skill-name">HTML</span>
-        <div class="bar"><span style="width:90%"></span></div>
-      </div>
-      <div class="skill">
-        <span class="skill-name">Tailwind CSS</span>
-        <div class="bar"><span style="width:88%"></span></div>
-      </div>
-    </div>
-    <div class="tab-content" id="backend">
-      <div class="skill">
-        <span class="skill-name">Node.js</span>
-        <div class="bar"><span style="width:85%"></span></div>
-      </div>
-      <div class="skill">
-        <span class="skill-name">PostgreSQL</span>
-        <div class="bar"><span style="width:80%"></span></div>
-      </div>
-    </div>
-    <div class="tab-content" id="devops">
-      <div class="skill">
-        <span class="skill-name">Docker</span>
-        <div class="bar"><span style="width:75%"></span></div>
-      </div>
-      <div class="skill">
-        <span class="skill-name">AWS</span>
-        <div class="bar"><span style="width:70%"></span></div>
-      </div>
-    </div>
-  </section>
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const activeItem = document.querySelector('.menu-item.active');
+            const activeIndex = Array.from(menuItems).indexOf(activeItem);
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <h2>// PROJECT_PORTFOLIO.exe</h2>
-    <div class="projects">
-      <div class="project-card" onclick="window.location.href='https://nepsol.onrender.com'">
-        <small>PROJECT_01</small>
-        <h3>TRANSACTION_WEBSITE</h3>
-        <p>Built the Frontend for the transaction of Solana coins.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>// CONTACT_PROTOCOL.init()</h2>
-    <div class="contact-box">
-      <p><span>COMMUNICATION_CHANNELS:</span></p>
-      <p><strong>EMAIL:</strong> pratyush.stha.np@gmail.com</p>
-      <p><strong>GITHUB:</strong> <a href="https://github.com/PratyushShrestha-web">/PratyushShestha-web</a></p>
-      <p><strong>LINKEDIN:</strong> <a href="https://www.linkedin.com/in/pratyush-shrestha-239384341">/in/pratyush-shrestha-239384341</a></p>
-      <p><strong>TWITTER:</strong> <a href="https://x.com/PratyushShrstha">@PratyushShrstha</a></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>SYSTEM_INFO: Version 2025.9.27 | Build: PRODUCTION | Uptime: 99.9%</p>
-    <p>©2025 Pratyush Shrestha - All rights reserved</p>
-  </footer>
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextIndex = (activeIndex + 1) % menuItems.length;
+                menuItems[nextIndex].click();
+                menuItems[nextIndex].focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevIndex = (activeIndex - 1 + menuItems.length) % menuItems.length;
+                menuItems[prevIndex].click();
+                menuItems[prevIndex].focus();
+            }
+        });
+    </script>
 </body>
 </html>
+
