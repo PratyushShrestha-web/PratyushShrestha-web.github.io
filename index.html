@@ -7,7 +7,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
+body{background:#050403;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:white}
 
 /* ───────── LOADING SCREEN ───────── */
 #loading{
@@ -28,6 +28,20 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
   color:rgba(255,255,255,0.5);
   cursor:pointer;
   animation:pulse 1.5s infinite;
+  padding:10px 20px;
+  border:1px solid rgba(255,255,255,0.3);
+  transition:all 0.3s ease;
+}
+
+#enter:hover{
+  color:rgba(255,255,255,0.8);
+  border-color:rgba(255,255,255,0.6);
+  background:rgba(255,255,255,0.05);
+}
+
+#enter:focus{
+  outline:none;
+  box-shadow:0 0 15px rgba(255,255,255,0.3);
 }
 
 @keyframes pulse{
@@ -119,7 +133,8 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
 @keyframes showMain{
   to{opacity:1}
 }
-  /* AAA BACKGROUND */
+
+/* AAA BACKGROUND */
 .bg{
   position:absolute;
   inset:0;
@@ -132,15 +147,17 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
 .vignette{
   position:absolute;
   inset:0;
-  background:radial-gradient(circle,transparent 50%,rgba(0,0,0,0.8));
+  background:radial-gradient(circle,transparent 50%,rgba(0,0,0,0.6));
   pointer-events:none;
 }
+
 .menu{
   position:absolute;
   left:5%;
   top:50%;
   transform:translateY(-50%);
 }
+
 .menu-item{
   font-size:60px;
   margin:12px 0;
@@ -149,6 +166,8 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
   transform:translateX(-40px);
   cursor:pointer;
   transition:0.4s ease;
+  padding:8px 12px;
+  border-left:3px solid transparent;
 }
 
 /* appear animation */
@@ -163,15 +182,19 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
 #main.show .menu-item:nth-child(3){transition-delay:0.5s}
 #main.show .menu-item:nth-child(4){transition-delay:0.65s}
 
-/* hover */
-.menu-item:hover{
+/* hover & focus */
+.menu-item:hover,
+.menu-item.active{
   opacity:1;
   transform:translateX(15px) scale(1.05);
   text-shadow:0 0 25px rgba(255,255,255,0.25);
+  border-left-color:rgba(255,200,100,0.6);
 }
 
-
-
+.menu-item:focus{
+  outline:none;
+  border-left-color:rgba(255,200,100,1);
+}
 
 /* HUD */
 .hud{
@@ -185,7 +208,8 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
   justify-content:center;
   gap:30px;
 }
-  .bg::after{
+
+.bg::after{
   content:'';
   position:absolute;
   top:30%;
@@ -207,10 +231,18 @@ body::after{
   position:fixed;
   inset:0;
   pointer-events:none;
-  background:url('https://grainy-gradients.vercel.app/noise.svg');
-  opacity:0.05;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.03) 2px,
+      rgba(255,255,255,0.03) 4px
+    );
+  opacity:1;
 }
 
+/* Custom cursor */
 body{
   cursor:none;
 }
@@ -223,9 +255,52 @@ body{
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
+  z-index:10000;
 }
 
+/* MOBILE RESPONSIVENESS */
+@media (max-width:768px){
+  .menu-item{
+    font-size:36px;
+    margin:8px 0;
+    padding:12px;
+  }
 
+  .hud{
+    font-size:10px;
+    gap:15px;
+    flex-wrap:wrap;
+  }
+
+  .shooter{
+    display:none;
+  }
+
+  #enter{
+    font-size:12px;
+  }
+
+  /* Hide custom cursor on touch */
+  @media (hover:none){
+    #cursor{
+      display:none;
+    }
+    body{
+      cursor:auto;
+    }
+  }
+}
+
+@media (max-width:480px){
+  .menu-item{
+    font-size:24px;
+    margin:6px 0;
+  }
+
+  .vignette{
+    background:radial-gradient(circle,transparent 40%,rgba(0,0,0,0.7));
+  }
+}
 </style>
 </head>
 
@@ -237,46 +312,45 @@ body{
 </audio>
 
 <!-- LOADING -->
-<div id="loading">
+<div id="loading" role="status" aria-label="Loading animation">
 
-  <div class="shooter" id="shooter">
+  <div class="shooter" id="shooter" aria-hidden="true">
     <div class="gun"></div>
     <div class="flash" id="flash"></div>
   </div>
 
-  <div class="impact" id="impact"></div>
-  <div class="crack" id="crack"></div>
+  <div class="impact" id="impact" aria-hidden="true"></div>
+  <div class="crack" id="crack" aria-hidden="true"></div>
 
-  <div id="enter">[ CLICK TO ENTER ]</div>
+  <button id="enter" aria-label="Click to enter portfolio">[ CLICK TO ENTER ]</button>
 </div>
 
 <!-- MAIN -->
-<div id="main">
+<div id="main" role="main">
 
-<div id="cursor"></div>
+  <div id="cursor" aria-hidden="true"></div>
+
   <!-- BACKGROUND -->
-  <div class="bg"></div>
+  <div class="bg" aria-hidden="true"></div>
 
   <!-- VIGNETTE -->
-  <div class="vignette"></div>
+  <div class="vignette" aria-hidden="true"></div>
 
-  <!-- MENU -->
-  <div class="menu">
-    <div class="menu-item">ABOUT</div>
-    <div class="menu-item">SKILLS</div>
-    <div class="menu-item">PROJECTS</div>
-    <div class="menu-item">CONTACT</div>
-  </div>
+  <!-- NAVIGATION MENU -->
+  <nav class="menu" role="navigation" aria-label="Main menu">
+    <button class="menu-item" data-section="about">ABOUT</button>
+    <button class="menu-item" data-section="skills">SKILLS</button>
+    <button class="menu-item" data-section="projects">PROJECTS</button>
+    <button class="menu-item" data-section="contact">CONTACT</button>
+  </nav>
 
   <!-- HUD -->
-  <div class="hud">
+  <div class="hud" aria-label="Keyboard navigation hints">
     <span>↑ ↓ Navigate</span>
     <span>Enter Select</span>
     <span>ESC Back</span>
   </div>
 </div>
-
-
 
 <script>
 const shooter = document.getElementById('shooter');
@@ -286,9 +360,24 @@ const crack = document.getElementById('crack');
 const loading = document.getElementById('loading');
 const main = document.getElementById('main');
 const gun = document.getElementById('gunshot');
-const enter = document.getElementById('enter');
+const enterBtn = document.getElementById('enter');
+const menuItems = document.querySelectorAll('.menu-item');
+const cursor = document.getElementById('cursor');
 
-enter.addEventListener('click', () => {
+let selectedIndex = 0;
+let animationPlayed = false;
+
+// ────── ENTER ANIMATION ──────
+enterBtn.addEventListener('click', playEnterAnimation);
+enterBtn.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    playEnterAnimation();
+  }
+});
+
+function playEnterAnimation() {
+  if (animationPlayed) return;
+  animationPlayed = true;
 
   // start animations
   shooter.classList.add('play');
@@ -297,34 +386,104 @@ enter.addEventListener('click', () => {
   crack.classList.add('play');
 
   // play sound EXACTLY at flash (1s)
-  setTimeout(()=>{
+  setTimeout(() => {
     gun.currentTime = 0;
-    gun.play();
-  },1000);
+    gun.play().catch(() => console.log('Audio playback failed or blocked'));
+  }, 1000);
 
   // transition to site
-  setTimeout(()=>{
+  setTimeout(() => {
     loading.classList.add('fade');
     main.classList.add('show');
-  },2500);
+    enterBtn.style.display = 'none';
+    menuItems[0].focus();
+  }, 2500);
+}
 
-  // hide button
-  enter.style.display = 'none';
+// ────── KEYBOARD NAVIGATION ──────
+document.addEventListener('keydown', (e) => {
+  if (!main.classList.contains('show')) return;
+
+  const itemCount = menuItems.length;
+
+  switch(e.key) {
+    case 'ArrowUp':
+      e.preventDefault();
+      selectedIndex = (selectedIndex - 1 + itemCount) % itemCount;
+      updateSelection();
+      break;
+    case 'ArrowDown':
+      e.preventDefault();
+      selectedIndex = (selectedIndex + 1) % itemCount;
+      updateSelection();
+      break;
+    case 'Enter':
+      e.preventDefault();
+      handleMenuSelect(menuItems[selectedIndex]);
+      break;
+    case 'Escape':
+      handleEscape();
+      break;
+  }
 });
 
-  document.addEventListener('mousemove', e => {
+function updateSelection() {
+  menuItems.forEach((item, idx) => {
+    if (idx === selectedIndex) {
+      item.classList.add('active');
+      item.focus();
+    } else {
+      item.classList.remove('active');
+    }
+  });
+}
+
+function handleMenuSelect(item) {
+  const section = item.dataset.section;
+  console.log('Selected:', section);
+  // Add your navigation logic here
+}
+
+function handleEscape() {
+  console.log('ESC pressed');
+  // Add your back/close logic here
+}
+
+// ────── MOUSE INTERACTIONS ──────
+// Throttled mousemove for background parallax
+let lastMoveTime = 0;
+const THROTTLE_DELAY = 16; // ~60fps
+
+document.addEventListener('mousemove', (e) => {
+  const now = Date.now();
+  if (now - lastMoveTime < THROTTLE_DELAY) return;
+  lastMoveTime = now;
+
+  // Background parallax
   const x = (e.clientX / window.innerWidth - 0.5) * 10;
   const y = (e.clientY / window.innerHeight - 0.5) * 10;
+  document.querySelector('.bg').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
 
-  document.querySelector('.bg').style.transform =
-    `translate(${x}px, ${y}px) scale(1.05)`;
-});
-
-const cursor = document.getElementById('cursor');
-document.addEventListener('mousemove', e=>{
+  // Custom cursor
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
 });
+
+// Menu item hover selection (mouse)
+menuItems.forEach((item, idx) => {
+  item.addEventListener('mouseenter', () => {
+    selectedIndex = idx;
+    updateSelection();
+  });
+  item.addEventListener('click', () => {
+    handleMenuSelect(item);
+  });
+});
+
+// Hide custom cursor on touch devices
+if (window.matchMedia('(hover:none)').matches) {
+  cursor.style.display = 'none';
+}
 </script>
 
 </body>
