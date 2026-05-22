@@ -6,15 +6,16 @@
 <title>Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 @font-face {
   font-family: 'RoughTexture';
-  src: url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAFswAAwAAAAAi4gAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABWAAAAGAAAABgDxIE7GNQSFA4AAA+ZAAAA7AAAA66BxP8Z0dERZoAAAFWAAAAHAAAABwDlADPmdhbXgAAAYoAAACvAAABLgGywDlnbHlmAAABoAAAA+kAAAX8Z5MNxGhlYWQAAAWwAAAANwAAADYKrD6gaGhlYQAABegAAAAkAAAAJAfkA3tobXR4AAAG/AAAADIAAABIEqQFZmxvY2EAAAcYAAAADgAAABIBcADObWF4cAAAAxgAAAAgAAAAIAEcAIduYW1lAAADOAAAAaIAAAH6TiJ3rXBvc3QAAAsoAAAA4wAAAP+uDwrreJxjYGRgYOBi0GFgYWCcxMzAwMrAxOjE6MTg7MDA6MTiyMDAwOi+/3/BfxkAwG4DAAeEGQAA') format('woff');
+  src: url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAFswAAwAAAAAi4gAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABWAAAAGAAAABgDxIE7GNQSFA4AAA+ZAAAA7AAAA66BxP8Z0dERZoAAAFWAAAAHAAAABwDlA[...]
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050403;overflow:hidden;font-family:'Press Start 2P', 'RoughTexture', cursive;color:white;letter-spacing:3px}
+body{background:#050403;overflow:hidden;font-family:'Noto Sans', sans-serif;color:white;letter-spacing:1px}
 
 /* ───────── LOADING SCREEN ───────── */
 #loading{
@@ -37,6 +38,7 @@ body{background:#050403;overflow:hidden;font-family:'Press Start 2P', 'RoughText
   text-shadow:0 0 20px rgba(255,200,100,0.4);
   animation:titleGlow 3s infinite;
   font-weight:bold;
+  font-family:'Press Start 2P', cursive;
 }
 
 @keyframes titleGlow{
@@ -125,6 +127,99 @@ body{background:#050403;overflow:hidden;font-family:'Press Start 2P', 'RoughText
   opacity:0;
 }
 
+/* MODAL OVERLAY */
+#modalOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.4s ease, visibility 0.4s ease;
+  z-index:100;
+}
+
+#modalOverlay.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* MODAL BOX */
+.modal{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%) scale(0.9);
+  background:rgba(10,9,7,0.95);
+  border:2px solid rgba(255,200,100,0.5);
+  padding:40px;
+  max-width:700px;
+  width:90%;
+  max-height:70vh;
+  overflow-y:auto;
+  z-index:101;
+  box-shadow:0 0 40px rgba(255,200,100,0.2);
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+}
+
+.modal.active{
+  opacity:1;
+  visibility:visible;
+  transform:translate(-50%, -50%) scale(1);
+}
+
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+  border-bottom:2px solid rgba(255,200,100,0.3);
+  padding-bottom:15px;
+}
+
+.modal-title{
+  font-size:28px;
+  font-weight:bold;
+  color:rgba(255,200,100,0.9);
+  letter-spacing:2px;
+  font-family:'Press Start 2P', cursive;
+}
+
+.modal-close{
+  background:none;
+  border:none;
+  color:rgba(255,255,255,0.6);
+  font-size:24px;
+  cursor:pointer;
+  transition:color 0.3s ease;
+  padding:0;
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-close:hover{
+  color:rgba(255,200,100,0.9);
+}
+
+.modal-content{
+  font-size:14px;
+  line-height:1.8;
+  color:rgba(255,255,255,0.8);
+}
+
+.modal-content p{
+  margin-bottom:15px;
+}
+
+.modal-content strong{
+  color:rgba(255,200,100,0.9);
+  font-weight:700;
+}
+
 /* SECTION CONTENT */
 .section{
   position:absolute;
@@ -147,6 +242,7 @@ body{background:#050403;overflow:hidden;font-family:'Press Start 2P', 'RoughText
   letter-spacing:4px;
   color:rgba(255,200,100,0.8);
   text-shadow:0 0 15px rgba(255,200,100,0.3);
+  font-family:'Press Start 2P', cursive;
 }
 
 .section-content{
@@ -305,23 +401,24 @@ body::after{
 
 /* Custom cursor */
 body{
-  cursor:none;
+  cursor:auto;
 }
 
 #cursor{
   position:fixed;
   width:10px;
   height:10px;
-  border:1px solid white;
+  border:2px solid rgba(255,200,100,0.8);
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
   z-index:10000;
-  opacity:1;
+  opacity:0;
+  box-shadow:0 0 8px rgba(255,200,100,0.5);
 }
 
-#cursor.hidden{
-  opacity:0;
+#cursor.visible{
+  opacity:1;
 }
 
 /* MOBILE RESPONSIVENESS */
@@ -350,14 +447,17 @@ body{
     font-size:24px;
   }
 
-  /* Hide custom cursor on touch */
-  @media (hover:none){
-    #cursor{
-      display:none;
-    }
-    body{
-      cursor:auto;
-    }
+  .modal{
+    padding:30px;
+    width:95%;
+  }
+
+  .modal-title{
+    font-size:20px;
+  }
+
+  .modal-content{
+    font-size:12px;
   }
 }
 
@@ -381,6 +481,19 @@ body{
 
   .section-content{
     font-size:9px;
+  }
+
+  .modal{
+    max-width:90%;
+    padding:20px;
+  }
+
+  .modal-title{
+    font-size:18px;
+  }
+
+  .modal-content{
+    font-size:11px;
   }
 }
 </style>
@@ -423,55 +536,28 @@ body{
   <!-- NAVIGATION MENU -->
   <nav class="menu" role="navigation" aria-label="Main menu">
     <button class="menu-item" data-section="about">ABOUT</button>
-    <button class="menu-item" data-section="skills">SKILLS</button>
+    <button class="menu-item" data-section="qualification">QUALIFICATION</button>
     <button class="menu-item" data-section="projects">PROJECTS</button>
     <button class="menu-item" data-section="contact">CONTACT</button>
   </nav>
 
-  <!-- SECTIONS -->
-  <div id="about" class="section active">
-    <h2 class="section-title">ABOUT ME</h2>
-    <div class="section-content">
-      <p>Welcome to my digital portfolio. I'm a full-stack developer passionate about creating immersive digital experiences. With a background in both frontend and backend technologies, I focus on building applications that are not just functional but also engaging and visually compelling.</p>
-      <p style="margin-top:20px;">My journey in tech began with a curiosity about how things work, which evolved into a career dedicated to solving complex problems through code and creative design.</p>
-    </div>
-  </div>
+  <!-- MODAL OVERLAY -->
+  <div id="modalOverlay"></div>
 
-  <div id="skills" class="section">
-    <h2 class="section-title">SKILLS</h2>
-    <div class="section-content">
-      <p><strong>Frontend:</strong> HTML5, CSS3, JavaScript, React, Vue.js, Three.js</p>
-      <p style="margin-top:15px;"><strong>Backend:</strong> Node.js, Express, Python, MongoDB, PostgreSQL</p>
-      <p style="margin-top:15px;"><strong>Tools & Tech:</strong> Git, Webpack, Docker, REST APIs, WebSockets</p>
-      <p style="margin-top:15px;"><strong>Design:</strong> UI/UX Design, Animation, Game Development Concepts</p>
+  <!-- MODAL BOX -->
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">About Me</h2>
+      <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
     </div>
-  </div>
-
-  <div id="projects" class="section">
-    <h2 class="section-title">PROJECTS</h2>
-    <div class="section-content">
-      <p><strong>Project Alpha</strong> - An immersive 3D web experience using Three.js</p>
-      <p style="margin-top:15px;"><strong>Project Beta</strong> - Full-stack e-commerce platform with real-time features</p>
-      <p style="margin-top:15px;"><strong>Project Gamma</strong> - Game menu system with interactive animations</p>
-    </div>
-  </div>
-
-  <div id="contact" class="section">
-    <h2 class="section-title">CONTACT</h2>
-    <div class="section-content">
-      <p>Get in touch with me through any of these channels:</p>
-      <p style="margin-top:15px;"><strong>Email:</strong> your.email@example.com</p>
-      <p style="margin-top:15px;"><strong>GitHub:</strong> github.com/yourprofile</p>
-      <p style="margin-top:15px;"><strong>LinkedIn:</strong> linkedin.com/in/yourprofile</p>
-      <p style="margin-top:15px;"><strong>Twitter:</strong> @yourhandle</p>
-    </div>
+    <div class="modal-content" id="modalContent"></div>
   </div>
 
   <!-- HUD -->
   <div class="hud" aria-label="Keyboard navigation hints">
     <span>↑ ↓ NAVIGATE</span>
     <span>ENTER SELECT</span>
-    <span>ESC BACK</span>
+    <span>ESC CLOSE</span>
   </div>
 </div>
 
@@ -486,11 +572,48 @@ const gun = document.getElementById('gunshot');
 const enterBtn = document.getElementById('enter');
 const menuItems = document.querySelectorAll('.menu-item');
 const cursor = document.getElementById('cursor');
-const sections = document.querySelectorAll('.section');
+const modal = document.getElementById('modal');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalTitle = document.getElementById('modalTitle');
+const modalContent = document.getElementById('modalContent');
+const modalClose = document.getElementById('modalClose');
 
 let selectedIndex = 0;
 let animationPlayed = false;
-let currentSection = null;
+let modalOpen = false;
+
+const sectionData = {
+  about: {
+    title: 'ABOUT ME',
+    content: `<p>Welcome to my digital portfolio. I'm a full-stack developer passionate about creating immersive digital experiences. With a background in both frontend and backend technologies, I focus on building beautiful and functional applications.</p>
+    <p style="margin-top:15px;">My journey in tech began with a curiosity about how things work, which evolved into a career dedicated to solving complex problems through code and creative design. I believe in continuous learning and staying updated with the latest technologies.</p>
+    <p style="margin-top:15px;">When I'm not coding, you can find me exploring new design trends, playing games, or contributing to open-source projects.</p>`
+  },
+  qualification: {
+    title: 'QUALIFICATION',
+    content: `<p><strong>Frontend:</strong> HTML5, CSS3, JavaScript, React, Vue.js, Three.js, GSAP</p>
+    <p style="margin-top:15px;"><strong>Backend:</strong> Node.js, Express, Python, MongoDB, PostgreSQL, Firebase</p>
+    <p style="margin-top:15px;"><strong>Tools & Tech:</strong> Git, Webpack, Vite, Docker, REST APIs, WebSockets, Docker, CI/CD</p>
+    <p style="margin-top:15px;"><strong>Design:</strong> UI/UX Design, Figma, Animation, Game Development Concepts, Blender</p>
+    <p style="margin-top:15px;"><strong>Certifications:</strong> Full Stack Web Development, Advanced JavaScript, Cloud Computing Basics</p>`
+  },
+  projects: {
+    title: 'PROJECTS',
+    content: `<p><strong>Project Alpha</strong> - An immersive 3D web experience using Three.js and WebGL. Created interactive particle systems and real-time rendering with advanced shaders.</p>
+    <p style="margin-top:15px;"><strong>Project Beta</strong> - Full-stack e-commerce platform with real-time features. Built with React, Node.js, and MongoDB. Implemented payment integration and user authentication.</p>
+    <p style="margin-top:15px;"><strong>Project Gamma</strong> - Game menu system with interactive animations and smooth transitions. Created with vanilla JavaScript and CSS animations for a polished gaming experience.</p>
+    <p style="margin-top:15px;"><strong>Project Delta</strong> - AI-powered content management system with advanced search and filtering capabilities. Built REST APIs and implemented real-time notifications using WebSockets.</p>`
+  },
+  contact: {
+    title: 'CONTACT',
+    content: `<p>Get in touch with me through any of these channels:</p>
+    <p style="margin-top:15px;"><strong>Email:</strong> your.email@example.com</p>
+    <p style="margin-top:15px;"><strong>GitHub:</strong> github.com/yourprofile</p>
+    <p style="margin-top:15px;"><strong>LinkedIn:</strong> linkedin.com/in/yourprofile</p>
+    <p style="margin-top:15px;"><strong>Twitter:</strong> @yourhandle</p>
+    <p style="margin-top:15px;"><strong>Portfolio:</strong> yourportfolio.com</p>`
+  }
+};
 
 // ────── ENTER ANIMATION ──────
 enterBtn.addEventListener('click', playEnterAnimation);
@@ -498,11 +621,6 @@ enterBtn.addEventListener('keypress', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
     playEnterAnimation();
   }
-});
-
-// Show cursor on loading screen
-enterBtn.addEventListener('mouseenter', () => {
-  cursor.classList.remove('hidden');
 });
 
 function playEnterAnimation() {
@@ -526,14 +644,54 @@ function playEnterAnimation() {
     loading.classList.add('fade');
     main.classList.add('show');
     enterBtn.style.display = 'none';
-    cursor.classList.remove('hidden');
+    cursor.classList.add('visible');
     menuItems[0].focus();
   }, 2500);
 }
 
+// ────── MODAL FUNCTIONS ──────
+function openModal(sectionId) {
+  const data = sectionData[sectionId];
+  if (!data) return;
+
+  modalTitle.textContent = data.title;
+  modalContent.innerHTML = data.content;
+  modal.classList.add('active');
+  modalOverlay.classList.add('active');
+  modalOpen = true;
+  modalClose.focus();
+}
+
+function closeModal() {
+  modal.classList.remove('active');
+  modalOverlay.classList.remove('active');
+  modalOpen = false;
+  menuItems[selectedIndex].focus();
+}
+
+// Modal close button
+modalClose.addEventListener('click', closeModal);
+
+// Modal overlay click to close
+modalOverlay.addEventListener('click', closeModal);
+
+// Prevent modal click from closing
+modal.addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+
 // ────── KEYBOARD NAVIGATION ──────
 document.addEventListener('keydown', (e) => {
   if (!main.classList.contains('show')) return;
+
+  // Handle modal-open state
+  if (modalOpen) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeModal();
+    }
+    return;
+  }
 
   const itemCount = menuItems.length;
 
@@ -553,7 +711,7 @@ document.addEventListener('keydown', (e) => {
       handleMenuSelect(menuItems[selectedIndex]);
       break;
     case 'Escape':
-      handleEscape();
+      e.preventDefault();
       break;
   }
 });
@@ -571,28 +729,7 @@ function updateSelection() {
 
 function handleMenuSelect(item) {
   const section = item.dataset.section;
-  showSection(section);
-}
-
-function showSection(sectionId) {
-  // Hide all sections
-  sections.forEach(sec => sec.classList.remove('active'));
-  
-  // Show selected section
-  const selectedSec = document.getElementById(sectionId);
-  if (selectedSec) {
-    selectedSec.classList.add('active');
-    currentSection = sectionId;
-  }
-}
-
-function handleEscape() {
-  if (currentSection) {
-    // Hide section and return to menu
-    sections.forEach(sec => sec.classList.remove('active'));
-    currentSection = null;
-    menuItems[selectedIndex].focus();
-  }
+  openModal(section);
 }
 
 // ────── MOUSE INTERACTIONS ──────
@@ -604,6 +741,11 @@ document.addEventListener('mousemove', (e) => {
   const now = Date.now();
   if (now - lastMoveTime < THROTTLE_DELAY) return;
   lastMoveTime = now;
+
+  // Show cursor
+  if (main.classList.contains('show')) {
+    cursor.classList.add('visible');
+  }
 
   // Background parallax
   const x = (e.clientX / window.innerWidth - 0.5) * 10;
