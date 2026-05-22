@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pratyush Shrestha</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -57,7 +57,7 @@ body{
   text-shadow:2px 2px 0px rgba(0,0,0,0.3);
   animation:titleGlow 3s infinite;
   font-weight:bold;
-  font-family:'Orbitron', sans-serif;
+  font-family:'Courier Prime', monospace;
 }
 
 @keyframes titleGlow{
@@ -77,7 +77,7 @@ body{
   border:2px solid rgba(0,0,0,0.8);
   background:rgba(255,255,255,0.8);
   transition:all 0.3s ease;
-  font-family:'Orbitron', sans-serif;
+  font-family:'Courier Prime', monospace;
   font-weight:bold;
 }
 
@@ -225,7 +225,7 @@ body{
   font-weight:bold;
   color:rgba(0,0,0,0.95);
   letter-spacing:2px;
-  font-family:'Orbitron', sans-serif;
+  font-family:'Courier Prime', monospace;
 }
 
 .modal-close{
@@ -297,11 +297,8 @@ body{
   width:100%;
   height:100%;
   background:
-    linear-gradient(0deg, transparent 24%, rgba(0,0,0,0.03) 25%, rgba(0,0,0,0.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,0.03) 75%, rgba(0,0,0,0.03) 76%, transparent 77%, transparent),
-    linear-gradient(90deg, transparent 24%, rgba(0,0,0,0.03) 25%, rgba(0,0,0,0.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,0.03) 75%, rgba(0,0,0,0.03) 76%, transparent 77%, transparent),
     radial-gradient(circle at 70% 40%, rgba(0,0,0,0.04), transparent 60%),
     linear-gradient(120deg,#ffffff,#f5f5f5,#ffffff);
-  background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%;
   z-index:0;
 }
 
@@ -342,24 +339,6 @@ body{
   z-index:10;
 }
 
-.menu-name{
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:3px;
-  color:rgba(0,0,0,0.9);
-  margin-bottom:40px;
-  font-family:'Orbitron', sans-serif;
-  opacity:0;
-  transform:translateX(-40px);
-}
-
-#main.show .menu-name{
-  opacity:1;
-  transform:translateX(0);
-  transition:0.4s ease;
-  transition-delay:0.1s;
-}
-
 .menu-item{
   font-size:24px;
   margin:16px 0;
@@ -372,7 +351,7 @@ body{
   border-left:4px solid transparent;
   background:transparent;
   color:rgba(0,0,0,0.6);
-  font-family:'Orbitron', sans-serif;
+  font-family:'Courier Prime', monospace;
   font-weight:bold;
   border:none;
 }
@@ -384,10 +363,10 @@ body{
 }
 
 /* stagger */
-#main.show .menu-item:nth-child(2){transition-delay:0.2s}
-#main.show .menu-item:nth-child(3){transition-delay:0.35s}
-#main.show .menu-item:nth-child(4){transition-delay:0.5s}
-#main.show .menu-item:nth-child(5){transition-delay:0.65s}
+#main.show .menu-item:nth-child(1){transition-delay:0.2s}
+#main.show .menu-item:nth-child(2){transition-delay:0.35s}
+#main.show .menu-item:nth-child(3){transition-delay:0.5s}
+#main.show .menu-item:nth-child(4){transition-delay:0.65s}
 
 /* hover & focus */
 .menu-item:hover,
@@ -415,7 +394,7 @@ body{
   display:flex;
   justify-content:center;
   gap:40px;
-  font-family:'Orbitron', sans-serif;
+  font-family:'Courier Prime', monospace;
   z-index:10;
   color:rgba(0,0,0,0.7);
 }
@@ -465,11 +444,6 @@ body{
 
 /* MOBILE RESPONSIVENESS */
 @media (max-width:768px){
-  .menu-name{
-    font-size:24px;
-    margin-bottom:30px;
-  }
-
   .menu-item{
     font-size:16px;
     margin:8px 0;
@@ -509,11 +483,6 @@ body{
 }
 
 @media (max-width:480px){
-  .menu-name{
-    font-size:18px;
-    margin-bottom:20px;
-  }
-
   .menu-item{
     font-size:14px;
     margin:6px 0;
@@ -577,7 +546,6 @@ body{
 
   <!-- NAVIGATION MENU -->
   <nav class="menu" role="navigation" aria-label="Main menu">
-    <div class="menu-name">PRATYUSH<br>SHRESTHA</div>
     <button class="menu-item" data-section="about">ABOUT</button>
     <button class="menu-item" data-section="qualification">QUALIFICATION</button>
     <button class="menu-item" data-section="projects">PROJECTS</button>
@@ -628,8 +596,8 @@ let modalOpen = false;
 const sectionData = {
   about: {
     title: 'ABOUT ME',
-    content: `<p>Welcome to my digital portfolio. I'm a full-stack developer passionate about creating immersive digital experiences. With a background in both frontend and backend technologies, I foc[...]
-    <p style="margin-top:15px;">My journey in tech began with a curiosity about how things work, which evolved into a career dedicated to solving complex problems through code and creative design. I b[...]
+    content: `<p>Welcome to my digital portfolio. I'm a full-stack developer passionate about creating immersive digital experiences. With a background in both frontend and backend technologies, I focus on building elegant solutions to complex problems.</p>
+    <p style="margin-top:15px;">My journey in tech began with a curiosity about how things work, which evolved into a career dedicated to solving complex problems through code and creative design. I believe in the power of technology to transform ideas into reality.</p>
     <p style="margin-top:15px;">When I'm not coding, you can find me exploring new design trends, playing games, or contributing to open-source projects.</p>`
   },
   qualification: {
@@ -643,9 +611,9 @@ const sectionData = {
   projects: {
     title: 'PROJECTS',
     content: `<p><strong>Project Alpha</strong> - An immersive 3D web experience using Three.js and WebGL. Created interactive particle systems and real-time rendering with advanced shaders.</p>
-    <p style="margin-top:15px;"><strong>Project Beta</strong> - Full-stack e-commerce platform with real-time features. Built with React, Node.js, and MongoDB. Implemented payment integration and user[...]
-    <p style="margin-top:15px;"><strong>Project Gamma</strong> - Game menu system with interactive animations and smooth transitions. Created with vanilla JavaScript and CSS animations for a polished [...]
-    <p style="margin-top:15px;"><strong>Project Delta</strong> - AI-powered content management system with advanced search and filtering capabilities. Built REST APIs and implemented real-time notific[...]
+    <p style="margin-top:15px;"><strong>Project Beta</strong> - Full-stack e-commerce platform with real-time features. Built with React, Node.js, and MongoDB. Implemented payment integration and user authentication.</p>
+    <p style="margin-top:15px;"><strong>Project Gamma</strong> - Game menu system with interactive animations and smooth transitions. Created with vanilla JavaScript and CSS animations for a polished experience.</p>
+    <p style="margin-top:15px;"><strong>Project Delta</strong> - AI-powered content management system with advanced search and filtering capabilities. Built REST APIs and implemented real-time notifications.</p>`
   },
   contact: {
     title: 'CONTACT',
