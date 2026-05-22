@@ -192,6 +192,22 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
   justify-content:center;
   gap:30px;
 }
+  .bg::after{
+  content:'';
+  position:absolute;
+  top:30%;
+  right:20%;
+  width:200px;
+  height:300px;
+  background:radial-gradient(circle, rgba(255,200,120,0.15), transparent 70%);
+  filter:blur(20px);
+  animation:flicker 6s infinite;
+}
+
+@keyframes flicker{
+  0%,100%{opacity:1}
+  50%{opacity:0.6}
+}
 </style>
 </head>
 
