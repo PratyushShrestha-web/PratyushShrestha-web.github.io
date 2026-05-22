@@ -208,6 +208,31 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
   0%,100%{opacity:1}
   50%{opacity:0.6}
 }
+
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity:0.05;
+}
+
+body{
+  cursor:none;
+}
+
+#cursor{
+  position:fixed;
+  width:10px;
+  height:10px;
+  border:1px solid white;
+  border-radius:50%;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+}
+
+
 </style>
 </head>
 
@@ -235,7 +260,7 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
 <!-- MAIN -->
 <div id="main">
 
-
+<div id="cursor"></div>
   <!-- BACKGROUND -->
   <div class="bg"></div>
 
@@ -300,6 +325,12 @@ enter.addEventListener('click', () => {
 
   document.querySelector('.bg').style.transform =
     `translate(${x}px, ${y}px) scale(1.05)`;
+});
+
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e=>{
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
 });
 </script>
 
