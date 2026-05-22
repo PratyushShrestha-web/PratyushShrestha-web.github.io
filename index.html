@@ -122,6 +122,59 @@ body{background:#050403;overflow:hidden;font-family:sans-serif;color:white}
 @keyframes showMain{
   to{opacity:1}
 }
+  /* AAA BACKGROUND */
+.bg{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 70% 40%, rgba(255,200,100,0.08), transparent 60%),
+    linear-gradient(120deg,#0a0907,#14110c,#050403);
+}
+
+/* CINEMATIC DARK EDGES */
+.vignette{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle,transparent 50%,rgba(0,0,0,0.8));
+  pointer-events:none;
+}
+
+/* MENU */
+.menu{
+  position:absolute;
+  left:5%;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.menu-item{
+  font-size:60px;
+  margin:10px 0;
+  letter-spacing:3px;
+  opacity:0.6;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+/* AAA HOVER */
+.menu-item:hover{
+  opacity:1;
+  transform:translateX(10px);
+  text-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+/* HUD */
+.hud{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+  font-size:12px;
+  opacity:0.5;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+}
 </style>
 </head>
 
