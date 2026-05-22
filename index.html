@@ -5,9 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
 <style>
+@font-face {
+  font-family: 'RoughTexture';
+  src: url('data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAFswAAwAAAAAi4gAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABPUy8yAAABWAAAAGAAAABgDxIE7GNQSFA4AAA+ZAAAA7AAAA66BxP8Z0dERZoAAAFWAAAAHAAAABwDlADPmdhbXgAAAYoAAACvAAABLgGywDlnbHlmAAABoAAAA+kAAAX8Z5MNxGhlYWQAAAWwAAAANwAAADYKrD6gaGhlYQAABegAAAAkAAAAJAfkA3tobXR4AAAG/AAAADIAAABIEqQFZmxvY2EAAAcYAAAADgAAABIBcADObWF4cAAAAxgAAAAgAAAAIAEcAIduYW1lAAADOAAAAaIAAAH6TiJ3rXBvc3QAAAsoAAAA4wAAAP+uDwrreJxjYGRgYOBi0GFgYWCcxMzAwMrAxOjE6MTg7MDA6MTiyMDAwOi+/3/BfxkAwG4DAAeEGQAA') format('woff');
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#050403;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:white}
+body{background:#050403;overflow:hidden;font-family:'Press Start 2P', 'RoughTexture', cursive;color:white;letter-spacing:3px}
 
 /* ───────── LOADING SCREEN ───────── */
 #loading{
@@ -17,36 +24,52 @@ body{background:#050403;overflow:hidden;font-family:-apple-system,BlinkMacSystem
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-direction:column;
+}
+
+/* TITLE WELCOME */
+#gameTitle{
+  position:absolute;
+  top:15%;
+  font-size:48px;
+  letter-spacing:8px;
+  color:rgba(255,255,255,0.8);
+  text-shadow:0 0 20px rgba(255,200,100,0.4);
+  animation:titleGlow 3s infinite;
+  font-weight:bold;
+}
+
+@keyframes titleGlow{
+  0%,100%{text-shadow:0 0 20px rgba(255,200,100,0.4), 0 0 40px rgba(255,200,100,0.2)}
+  50%{text-shadow:0 0 40px rgba(255,200,100,0.6), 0 0 60px rgba(255,200,100,0.4)}
 }
 
 /* CLICK TO START */
 #enter{
   position:absolute;
   bottom:15%;
-  font-size:14px;
-  letter-spacing:4px;
-  color:rgba(255,255,255,0.5);
+  font-size:12px;
+  letter-spacing:2px;
+  color:rgba(255,255,255,0.7);
   cursor:pointer;
-  animation:pulse 1.5s infinite;
-  padding:10px 20px;
-  border:1px solid rgba(255,255,255,0.3);
+  padding:12px 24px;
+  border:2px solid rgba(255,255,255,0.5);
+  background:rgba(0,0,0,0.3);
   transition:all 0.3s ease;
+  font-family:'Press Start 2P', cursive;
+  font-weight:bold;
 }
 
 #enter:hover{
-  color:rgba(255,255,255,0.8);
-  border-color:rgba(255,255,255,0.6);
-  background:rgba(255,255,255,0.05);
+  color:rgba(255,255,255,1);
+  border-color:rgba(255,200,100,0.8);
+  background:rgba(255,200,100,0.1);
+  box-shadow:0 0 20px rgba(255,200,100,0.4);
 }
 
 #enter:focus{
   outline:none;
-  box-shadow:0 0 15px rgba(255,255,255,0.3);
-}
-
-@keyframes pulse{
-  0%,100%{opacity:0.3}
-  50%{opacity:1}
+  box-shadow:0 0 25px rgba(255,200,100,0.6);
 }
 
 /* SHOOTER */
@@ -100,6 +123,37 @@ body{background:#050403;overflow:hidden;font-family:-apple-system,BlinkMacSystem
   position:absolute;
   inset:0;
   opacity:0;
+}
+
+/* SECTION CONTENT */
+.section{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.5s ease;
+  overflow-y:auto;
+  padding:40px;
+}
+
+.section.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.section-title{
+  font-size:32px;
+  margin-bottom:30px;
+  letter-spacing:4px;
+  color:rgba(255,200,100,0.8);
+  text-shadow:0 0 15px rgba(255,200,100,0.3);
+}
+
+.section-content{
+  font-size:11px;
+  line-height:1.8;
+  color:rgba(255,255,255,0.7);
+  max-width:800px;
 }
 
 /* ANIMATIONS */
@@ -159,15 +213,20 @@ body{background:#050403;overflow:hidden;font-family:-apple-system,BlinkMacSystem
 }
 
 .menu-item{
-  font-size:60px;
-  margin:12px 0;
-  letter-spacing:4px;
+  font-size:24px;
+  margin:16px 0;
+  letter-spacing:2px;
   opacity:0;
   transform:translateX(-40px);
   cursor:pointer;
   transition:0.4s ease;
-  padding:8px 12px;
-  border-left:3px solid transparent;
+  padding:10px 16px;
+  border-left:4px solid transparent;
+  background:transparent;
+  color:rgba(255,255,255,0.6);
+  font-family:'Press Start 2P', cursive;
+  font-weight:bold;
+  border:none;
 }
 
 /* appear animation */
@@ -186,9 +245,10 @@ body{background:#050403;overflow:hidden;font-family:-apple-system,BlinkMacSystem
 .menu-item:hover,
 .menu-item.active{
   opacity:1;
-  transform:translateX(15px) scale(1.05);
-  text-shadow:0 0 25px rgba(255,255,255,0.25);
-  border-left-color:rgba(255,200,100,0.6);
+  transform:translateX(15px) scale(1.08);
+  text-shadow:0 0 25px rgba(255,200,100,0.5);
+  border-left-color:rgba(255,200,100,0.8);
+  color:rgba(255,200,100,0.9);
 }
 
 .menu-item:focus{
@@ -202,11 +262,12 @@ body{background:#050403;overflow:hidden;font-family:-apple-system,BlinkMacSystem
   bottom:20px;
   width:100%;
   text-align:center;
-  font-size:12px;
+  font-size:10px;
   opacity:0.5;
   display:flex;
   justify-content:center;
-  gap:30px;
+  gap:40px;
+  font-family:'Press Start 2P', cursive;
 }
 
 .bg::after{
@@ -256,18 +317,23 @@ body{
   pointer-events:none;
   transform:translate(-50%,-50%);
   z-index:10000;
+  opacity:1;
+}
+
+#cursor.hidden{
+  opacity:0;
 }
 
 /* MOBILE RESPONSIVENESS */
 @media (max-width:768px){
   .menu-item{
-    font-size:36px;
+    font-size:16px;
     margin:8px 0;
     padding:12px;
   }
 
   .hud{
-    font-size:10px;
+    font-size:8px;
     gap:15px;
     flex-wrap:wrap;
   }
@@ -277,7 +343,11 @@ body{
   }
 
   #enter{
-    font-size:12px;
+    font-size:10px;
+  }
+
+  #gameTitle{
+    font-size:24px;
   }
 
   /* Hide custom cursor on touch */
@@ -293,12 +363,24 @@ body{
 
 @media (max-width:480px){
   .menu-item{
-    font-size:24px;
+    font-size:14px;
     margin:6px 0;
   }
 
   .vignette{
     background:radial-gradient(circle,transparent 40%,rgba(0,0,0,0.7));
+  }
+
+  #gameTitle{
+    font-size:18px;
+  }
+
+  .section-title{
+    font-size:18px;
+  }
+
+  .section-content{
+    font-size:9px;
   }
 }
 </style>
@@ -314,6 +396,8 @@ body{
 <!-- LOADING -->
 <div id="loading" role="status" aria-label="Loading animation">
 
+  <div id="gameTitle">WELCOME</div>
+
   <div class="shooter" id="shooter" aria-hidden="true">
     <div class="gun"></div>
     <div class="flash" id="flash"></div>
@@ -322,7 +406,7 @@ body{
   <div class="impact" id="impact" aria-hidden="true"></div>
   <div class="crack" id="crack" aria-hidden="true"></div>
 
-  <button id="enter" aria-label="Click to enter portfolio">[ CLICK TO ENTER ]</button>
+  <button id="enter" aria-label="Click to enter portfolio">CLICK TO ENTER</button>
 </div>
 
 <!-- MAIN -->
@@ -344,11 +428,50 @@ body{
     <button class="menu-item" data-section="contact">CONTACT</button>
   </nav>
 
+  <!-- SECTIONS -->
+  <div id="about" class="section active">
+    <h2 class="section-title">ABOUT ME</h2>
+    <div class="section-content">
+      <p>Welcome to my digital portfolio. I'm a full-stack developer passionate about creating immersive digital experiences. With a background in both frontend and backend technologies, I focus on building applications that are not just functional but also engaging and visually compelling.</p>
+      <p style="margin-top:20px;">My journey in tech began with a curiosity about how things work, which evolved into a career dedicated to solving complex problems through code and creative design.</p>
+    </div>
+  </div>
+
+  <div id="skills" class="section">
+    <h2 class="section-title">SKILLS</h2>
+    <div class="section-content">
+      <p><strong>Frontend:</strong> HTML5, CSS3, JavaScript, React, Vue.js, Three.js</p>
+      <p style="margin-top:15px;"><strong>Backend:</strong> Node.js, Express, Python, MongoDB, PostgreSQL</p>
+      <p style="margin-top:15px;"><strong>Tools & Tech:</strong> Git, Webpack, Docker, REST APIs, WebSockets</p>
+      <p style="margin-top:15px;"><strong>Design:</strong> UI/UX Design, Animation, Game Development Concepts</p>
+    </div>
+  </div>
+
+  <div id="projects" class="section">
+    <h2 class="section-title">PROJECTS</h2>
+    <div class="section-content">
+      <p><strong>Project Alpha</strong> - An immersive 3D web experience using Three.js</p>
+      <p style="margin-top:15px;"><strong>Project Beta</strong> - Full-stack e-commerce platform with real-time features</p>
+      <p style="margin-top:15px;"><strong>Project Gamma</strong> - Game menu system with interactive animations</p>
+    </div>
+  </div>
+
+  <div id="contact" class="section">
+    <h2 class="section-title">CONTACT</h2>
+    <div class="section-content">
+      <p>Get in touch with me through any of these channels:</p>
+      <p style="margin-top:15px;"><strong>Email:</strong> your.email@example.com</p>
+      <p style="margin-top:15px;"><strong>GitHub:</strong> github.com/yourprofile</p>
+      <p style="margin-top:15px;"><strong>LinkedIn:</strong> linkedin.com/in/yourprofile</p>
+      <p style="margin-top:15px;"><strong>Twitter:</strong> @yourhandle</p>
+    </div>
+  </div>
+
   <!-- HUD -->
   <div class="hud" aria-label="Keyboard navigation hints">
-    <span>↑ ↓ Navigate</span>
-    <span>Enter Select</span>
-    <span>ESC Back</span>
+    <span>↑ ↓ NAVIGATE</span>
+    <span>ENTER SELECT</span>
+    <span>ESC BACK</span>
   </div>
 </div>
 
@@ -363,9 +486,11 @@ const gun = document.getElementById('gunshot');
 const enterBtn = document.getElementById('enter');
 const menuItems = document.querySelectorAll('.menu-item');
 const cursor = document.getElementById('cursor');
+const sections = document.querySelectorAll('.section');
 
 let selectedIndex = 0;
 let animationPlayed = false;
+let currentSection = null;
 
 // ────── ENTER ANIMATION ──────
 enterBtn.addEventListener('click', playEnterAnimation);
@@ -373,6 +498,11 @@ enterBtn.addEventListener('keypress', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
     playEnterAnimation();
   }
+});
+
+// Show cursor on loading screen
+enterBtn.addEventListener('mouseenter', () => {
+  cursor.classList.remove('hidden');
 });
 
 function playEnterAnimation() {
@@ -396,6 +526,7 @@ function playEnterAnimation() {
     loading.classList.add('fade');
     main.classList.add('show');
     enterBtn.style.display = 'none';
+    cursor.classList.remove('hidden');
     menuItems[0].focus();
   }, 2500);
 }
@@ -440,13 +571,28 @@ function updateSelection() {
 
 function handleMenuSelect(item) {
   const section = item.dataset.section;
-  console.log('Selected:', section);
-  // Add your navigation logic here
+  showSection(section);
+}
+
+function showSection(sectionId) {
+  // Hide all sections
+  sections.forEach(sec => sec.classList.remove('active'));
+  
+  // Show selected section
+  const selectedSec = document.getElementById(sectionId);
+  if (selectedSec) {
+    selectedSec.classList.add('active');
+    currentSection = sectionId;
+  }
 }
 
 function handleEscape() {
-  console.log('ESC pressed');
-  // Add your back/close logic here
+  if (currentSection) {
+    // Hide section and return to menu
+    sections.forEach(sec => sec.classList.remove('active'));
+    currentSection = null;
+    menuItems[selectedIndex].focus();
+  }
 }
 
 // ────── MOUSE INTERACTIONS ──────
