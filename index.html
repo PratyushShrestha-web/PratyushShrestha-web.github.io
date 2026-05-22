@@ -1,221 +1,1849 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLAYER PROFILE - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS RESET & VARIABLES ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0a0a0a;
+      --deep:    #111116;
+      --groove:  #1a1a22;
+      --vinyl:   #161618;
+      --gold:    #c9a84c;
+      --gold2:   #e8cc7a;
+      --amber:   #ff9a3c;
+      --red:     #e63946;
+      --cream:   #f5f0e8;
+      --muted:   #8a8580;
+      --label-bg:#2a1f0e;
+      --label-text:#f0d080;
+
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-serif:   'Playfair Display', serif;
+      --font-mono:    'Space Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--cream);
+      font-family: var(--font-mono);
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ─── NAV ───────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: linear-gradient(180deg, rgba(10,10,10,0.98) 0%, transparent 100%);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─── HERO ──────────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 2rem 4rem;
+    }
+
+    /* Radial background glow */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(230,57,70,0.04) 0%, transparent 60%);
+    }
+
+    /* Spinning lines background */
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-lines span {
+      position: absolute;
+      display: block;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.05);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-lines span:nth-child(1)  { width: 20vw;  height: 20vw;  }
+    .hero-lines span:nth-child(2)  { width: 35vw;  height: 35vw;  }
+    .hero-lines span:nth-child(3)  { width: 50vw;  height: 50vw;  border-color: rgba(201,168,76,0.03); }
+    .hero-lines span:nth-child(4)  { width: 65vw;  height: 65vw;  }
+    .hero-lines span:nth-child(5)  { width: 80vw;  height: 80vw;  border-color: rgba(201,168,76,0.02); }
+    .hero-lines span:nth-child(6)  { width: 95vw;  height: 95vw;  }
+    .hero-lines span:nth-child(7)  { width: 110vw; height: 110vw; border-color: rgba(201,168,76,0.015); }
+    .hero-lines span:nth-child(8)  { width: 130vw; height: 130vw; }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 5rem;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .hero-text { }
+
+    .hero-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 8vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero-role {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.6);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      border: 2px solid var(--gold);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      border: 2px solid rgba(245,240,232,0.3);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ─── BIG VINYL (HERO) ──────────────────────────────────────────────── */
+    .vinyl-hero-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .vinyl-hero {
+      width: min(42vw, 480px);
+      height: min(42vw, 480px);
+      position: relative;
+      animation: spin-slow 20s linear infinite;
+      filter: drop-shadow(0 0 60px rgba(201,168,76,0.18));
+    }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    .vinyl-hero:hover { animation-play-state: paused; }
+
+    .vinyl-hero svg { width: 100%; height: 100%; }
+
+    /* Needle arm */
+    .needle {
+      position: absolute;
+      top: -10%;
+      right: -8%;
+      width: 120px;
+      transform-origin: 20px 20px;
+      animation: needle-bob 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes needle-bob {
+      0%, 100% { transform: rotate(-8deg); }
+      50%       { transform: rotate(-2deg); }
+    }
+
+    /* ─── SECTION SHARED ────────────────────────────────────────────────── */
+    section { padding: 7rem 2rem; position: relative; }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .section-tag {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      color: var(--cream);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(201,168,76,0.4) 0%, transparent 100%);
+    }
+
+    /* ─── TRACK LIST / ABOUT ────────────────────────────────────────────── */
+    #about { background: var(--deep); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-vinyl-stack {
+      position: relative;
+      height: 360px;
+    }
+
+    .mini-vinyl {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--vinyl);
+    }
+
+    /* Stack of vinyls */
+    .mini-vinyl:nth-child(1) {
+      width: 240px; height: 240px;
+      top: 80px; left: 80px;
+      background: conic-gradient(
+        #1a1a1a 0deg, #222 5deg, #1a1a1a 10deg, #222 15deg,
+        #1a1a1a 20deg, #222 25deg, #1a1a1a 30deg, #222 35deg,
+        #1a1a1a 40deg, #222 45deg, #1a1a1a 50deg
+      );
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+      animation: float3 6s ease-in-out infinite;
+    }
+
+    .mini-vinyl:nth-child(2) {
+      width: 220px; height: 220px;
+      top: 50px; left: 50px;
+      opacity: 0.7;
+      background: conic-gradient(
+        #161616 0deg, #1e1e1e 5deg, #161616 10deg, #1e1e1e 15deg,
+        #161616 20deg, #1e1e1e 25deg, #161616 30deg, #1e1e1e 35deg
+      );
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      animation: float3 6s ease-in-out infinite 0.5s;
+    }
+
+    .mini-vinyl:nth-child(3) {
+      width: 200px; height: 200px;
+      top: 20px; left: 20px;
+      opacity: 0.4;
+      background: #141414;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: float3 6s ease-in-out infinite 1s;
+    }
+
+    /* Center label on top vinyl */
+    .mini-vinyl:nth-child(1)::after {
+      content: 'A SIDE';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--label-bg);
+      color: var(--label-text);
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes float3 {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    .about-text h3 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+    }
+
+    .about-text h3 span { color: var(--gold); }
+
+    .about-text p {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.6);
+      margin-bottom: 1rem;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item { }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── SKILLS AS TRACK LIST ──────────────────────────────────────────── */
+    #skills { background: var(--black); }
+
+    .tracklist {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .track {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.2rem 1.5rem;
+      background: rgba(26,26,34,0.6);
+      border: 1px solid rgba(201,168,76,0.06);
+      transition: all 0.3s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0;
+      background: linear-gradient(90deg, rgba(201,168,76,0.08), transparent);
+      transition: width 0.4s;
+    }
+
+    .track:hover::before { width: 100%; }
+    .track:hover { border-color: rgba(201,168,76,0.3); }
+
+    .track-num {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      min-width: 24px;
+    }
+
+    .track-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .track-info { flex: 1; }
+
+    .track-name {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .track-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .track-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--amber));
+      transition: width 1.5s cubic-bezier(.16,1,.3,1);
+    }
+
+    .track-duration {
+      font-size: 0.65rem;
+      color: var(--muted);
+      min-width: 30px;
+      text-align: right;
+    }
+
+    /* ─── EXPERIENCE AS ALBUM SIDES ─────────────────────────────────────── */
+    #experience { background: var(--groove); }
+
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--gold) 0%, rgba(201,168,76,0.1) 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 3.5rem;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    /* The record dot on timeline */
+    .timeline-dot {
+      position: absolute;
+      left: -3rem;
+      top: 0.2rem;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--black);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      translate: -50% 0;
+    }
+
+    .timeline-dot::after {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .timeline-period {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    .timeline-role {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--cream);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-company {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+      line-height: 1.85;
+      color: rgba(245,240,232,0.55);
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .tag {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border: 1px solid rgba(201,168,76,0.25);
+      color: var(--gold);
+      border-radius: 1px;
+    }
+
+    /* ─── PROJECTS AS ALBUM COVERS ───────────────────────────────────────── */
+    #projects { background: var(--black); }
+
+    .albums-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .album-card {
+      position: relative;
+      aspect-ratio: 1;
+      background: var(--deep);
+      border: 1px solid rgba(201,168,76,0.1);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s cubic-bezier(.16,1,.3,1), border-color 0.3s;
+    }
+
+    .album-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(201,168,76,0.4);
+    }
+
+    /* Album cover art (CSS-generated) */
+    .album-art {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .album-art-1 {
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    }
+
+    .album-art-2 {
+      background: linear-gradient(135deg, #1a0000, #3d0000, #1a0000);
+    }
+
+    .album-art-3 {
+      background: linear-gradient(135deg, #0a1628, #1a3a5c, #0a1628);
+    }
+
+    .album-art-4 {
+      background: linear-gradient(135deg, #0d1b0d, #1a3a1a, #0d1b0d);
+    }
+
+    .album-art-5 {
+      background: linear-gradient(135deg, #1a0a00, #3d1f00, #1a0a00);
+    }
+
+    .album-art-6 {
+      background: linear-gradient(135deg, #1a001a, #2d0a2d, #1a001a);
+    }
+
+    /* Decorative concentric circles inside album art */
+    .album-art::before {
+      content: '';
+      position: absolute;
+      width: 60%; height: 60%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.05);
+      box-shadow:
+        0 0 0 20px rgba(255,255,255,0.03),
+        0 0 0 40px rgba(255,255,255,0.02),
+        0 0 0 60px rgba(255,255,255,0.01);
+    }
+
+    .album-label {
+      position: absolute;
+      width: 30%; height: 30%;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-align: center;
+    }
+
+    .album-label-1 { background: #c9a84c22; border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+    .album-label-2 { background: #e6394622; border: 1px solid rgba(230,57,70,0.3); color: var(--red); }
+    .album-label-3 { background: #3c9be822; border: 1px solid rgba(60,155,232,0.3); color: #3c9be8; }
+    .album-label-4 { background: #4caf5022; border: 1px solid rgba(76,175,80,0.3); color: #4caf50; }
+    .album-label-5 { background: #ff9a3c22; border: 1px solid rgba(255,154,60,0.3); color: var(--amber); }
+    .album-label-6 { background: #9c27b022; border: 1px solid rgba(156,39,176,0.3); color: #ce93d8; }
+
+    .album-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 30%, rgba(10,10,10,0.95) 100%);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      transition: opacity 0.35s;
+    }
+
+    .album-card:hover .album-overlay { opacity: 1; }
+
+    .album-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(0deg, rgba(10,10,10,0.9), transparent);
+    }
+
+    .album-title {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      color: var(--cream);
+      margin-bottom: 0.15rem;
+    }
+
+    .album-sub {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .album-links {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.6rem;
+    }
+
+    .album-link {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      text-decoration: none;
+      border-radius: 1px;
+      transition: all 0.2s;
+    }
+
+    .album-link:hover { background: var(--gold); color: var(--black); }
+
+    /* ─── EDUCATION AS RECORD LABELS ────────────────────────────────────── */
+    #education { background: var(--deep); }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .record-label-card {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.8rem;
+      background: rgba(26,31,14,0.4);
+      border: 1px solid rgba(201,168,76,0.1);
+      align-items: flex-start;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .record-label-card:hover {
+      border-color: rgba(201,168,76,0.35);
+      background: rgba(26,31,14,0.6);
+    }
+
+    /* Mini vinyl as decoration */
+    .card-vinyl {
+      flex-shrink: 0;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      position: relative;
+      animation: spin-slow 10s linear infinite;
+    }
+
+    .card-vinyl-inner {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        #1a1a1a 0deg, #222 4deg, #1a1a1a 8deg, #222 12deg,
+        #1a1a1a 16deg, #222 20deg, #1a1a1a 24deg, #222 28deg,
+        #1a1a1a 32deg, #222 36deg, #1a1a1a 40deg
+      );
+    }
+
+    .card-vinyl-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--label-bg);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-vinyl-center::after {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.6);
+    }
+
+    .edu-info { }
+
+    .edu-degree {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-school {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--amber);
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-year {
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────────────────────── */
+    #contact { background: var(--black); }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .contact-vinyl-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .contact-vinyl {
+      width: min(320px, 80vw);
+      height: min(320px, 80vw);
+      position: relative;
+    }
+
+    .contact-vinyl-disk {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        #181818 0deg,   #222 3deg, #181818 6deg,   #222 9deg,
+        #181818 12deg,  #222 15deg, #181818 18deg,  #222 21deg,
+        #181818 24deg,  #222 27deg, #181818 30deg,  #222 33deg,
+        #181818 36deg,  #222 39deg, #181818 42deg,  #222 45deg,
+        #181818 48deg,  #222 51deg, #181818 54deg,  #222 57deg,
+        #181818 60deg,  #222 63deg, #181818 66deg,  #222 69deg,
+        #181818 72deg,  #222 75deg, #181818 78deg,  #222 81deg,
+        #181818 84deg,  #222 87deg, #181818 90deg
+      );
+      box-shadow:
+        0 0 0 6px rgba(201,168,76,0.1),
+        0 0 0 7px rgba(201,168,76,0.05),
+        0 30px 80px rgba(0,0,0,0.8),
+        0 0 60px rgba(201,168,76,0.08);
+      animation: spin-slow 15s linear infinite;
+      position: relative;
+    }
+
+    .contact-vinyl-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 38%;
+      height: 38%;
+      border-radius: 50%;
+      background: var(--label-bg);
+      border: 2px solid rgba(201,168,76,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.15rem;
+      z-index: 2;
+    }
+
+    .contact-vinyl-label span:first-child {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--label-text);
+    }
+
+    .contact-vinyl-label span:last-child {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.4);
+      border: 1px solid var(--gold);
+    }
+
+    .contact-text h3 {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .contact-text h3 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .contact-text p {
+      font-size: 0.8rem;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.55);
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: rgba(245,240,232,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover { color: var(--gold); }
+
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .contact-link:hover .contact-link-icon {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.08);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────────────── */
+    footer {
+      padding: 2.5rem;
+      border-top: 1px solid rgba(201,168,76,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--black);
+    }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-grooves {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .footer-groove {
+      height: 12px;
+      border-radius: 1px;
+      background: rgba(201,168,76,0.3);
+    }
+
+    .footer-groove:nth-child(1) { width: 2px; }
+    .footer-groove:nth-child(2) { width: 3px; height: 16px; background: rgba(201,168,76,0.5); }
+    .footer-groove:nth-child(3) { width: 2px; }
+    .footer-groove:nth-child(4) { width: 4px; height: 20px; background: var(--gold); }
+    .footer-groove:nth-child(5) { width: 2px; }
+    .footer-groove:nth-child(6) { width: 3px; height: 14px; background: rgba(201,168,76,0.4); }
+    .footer-groove:nth-child(7) { width: 2px; }
+    .footer-groove:nth-child(8) { width: 2px; height: 18px; background: rgba(201,168,76,0.35); }
+    .footer-groove:nth-child(9) { width: 3px; }
+    .footer-groove:nth-child(10){ width: 2px; height: 10px; }
+
+    /* ─── AMBIENT SOUND BARS (decorative) ───────────────────────────────── */
+    .soundwave {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 24px;
+    }
+
+    .soundwave span {
+      display: block;
+      width: 3px;
+      border-radius: 2px;
+      background: var(--gold);
+      animation: wave 1s ease-in-out infinite;
+    }
+
+    .soundwave span:nth-child(1) { height: 8px;  animation-delay: 0s; }
+    .soundwave span:nth-child(2) { height: 18px; animation-delay: 0.1s; }
+    .soundwave span:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+    .soundwave span:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+    .soundwave span:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+    .soundwave span:nth-child(6) { height: 16px; animation-delay: 0.5s; }
+    .soundwave span:nth-child(7) { height: 8px;  animation-delay: 0.6s; }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(1); }
+      50%       { transform: scaleY(0.3); }
+    }
+
+    /* ─── BPM COUNTER (decorative) ──────────────────────────────────────── */
+    .bpm-display {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      opacity: 0.6;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .bpm-pulse {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 0.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.3; transform: scale(0.7); }
+    }
+
+    /* ─── SIDE B DIVIDER ────────────────────────────────────────────────── */
+    .side-divider {
+      padding: 1.5rem 3rem;
+      background: var(--label-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .side-text {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.35em;
+      color: var(--label-text);
+    }
+
+    /* ─── ANIMATIONS ENTRY ──────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.8s cubic-bezier(.16,1,.3,1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    .delay-4 { animation-delay: 0.6s; }
+    .delay-5 { animation-delay: 0.75s; }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero-content { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+      .hero-tag { justify-content: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .btn-group { justify-content: center; }
+      .vinyl-hero { width: min(60vw, 320px); height: min(60vw, 320px); }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-vinyl-stack { height: 260px; }
+      .tracklist { grid-template-columns: 1fr; }
+      .albums-grid { grid-template-columns: repeat(2, 1fr); }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .albums-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    /* ─── CUSTOM CURSOR RING ────────────────────────────────────────────── */
+    .cursor-ring {
+      position: fixed;
+      width: 24px; height: 24px;
+      border: 1px solid rgba(201,168,76,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transition: transform 0.1s, opacity 0.3s;
+      transform: translate(-50%, -50%);
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">◆ PLAYER PROFILE ◆</div>
-            <div class="player-name">YOUR NAME</div>
-            <div class="tagline">CREATIVE DEVELOPER PORTFOLIO</div>
+
+<!-- Custom cursor -->
+<div class="cursor-ring" id="cursor"></div>
+
+<!-- ─── NAV ──────────────────────────────────────────────────── -->
+<nav>
+  <a href="#hero" class="nav-logo">YN ◉</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-lines">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="hero-tag fade-up">Portfolio • Vol. I</p>
+      <h1 class="hero-name fade-up delay-1">YOUR<br /><em>NAME</em></h1>
+      <p class="hero-role fade-up delay-2">Full-Stack Developer &amp; Designer</p>
+      <p class="hero-desc fade-up delay-3">
+        Crafting digital experiences with the same care a record producer
+        brings to sound — every detail matters, every line of code a groove
+        in the master cut.
+      </p>
+      <div class="btn-group fade-up delay-4">
+        <a href="#projects" class="btn btn-primary">▶ Play My Work</a>
+        <a href="#contact" class="btn btn-outline">◎ Get In Touch</a>
+      </div>
+
+      <div style="margin-top:2.5rem; display:flex; gap:2rem; align-items:center;" class="fade-up delay-5">
+        <div class="soundwave">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span>
         </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Menu Panel -->
-            <div class="menu-panel">
-                <div class="menu-title">▼ MAIN MENU ▼</div>
-                <button class="menu-item active" onclick="showSection('about')">
-                    About
-                </button>
-                <button class="menu-item" onclick="showSection('projects')">
-                    Projects
-                </button>
-                <button class="menu-item" onclick="showSection('resume')">
-                    Resume
-                </button>
-                <button class="menu-item" onclick="showSection('contact')">
-                    Contact
-                </button>
-            </div>
-
-            <!-- Content Panel -->
-            <div class="content-panel">
-                <!-- About Section -->
-                <div id="about" class="content-section active">
-                    <div class="section-title">➤ ABOUT</div>
-                    <div class="section-content">
-                        <p>Welcome to my digital portfolio. I am a creative developer passionate about building interactive experiences and engaging web applications.</p>
-                        
-                        <div class="info-box">
-                            <div class="info-box-title">EXPERIENCE STATS</div>
-                            <div class="stat-bar">
-                                <div class="stat-label">Web Development: </div>
-                                <div class="stat-fill">
-                                    <div class="stat-bar-fill" style="width: 85%;"></div>
-                                </div>
-                            </div>
-                            <div class="stat-bar">
-                                <div class="stat-label">UI/UX Design: </div>
-                                <div class="stat-fill">
-                                    <div class="stat-bar-fill" style="width: 80%;"></div>
-                                </div>
-                            </div>
-                            <div class="stat-bar">
-                                <div class="stat-label">Problem Solving: </div>
-                                <div class="stat-fill">
-                                    <div class="stat-bar-fill" style="width: 90%;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p>With experience across frontend and backend technologies, I specialize in creating responsive, user-friendly interfaces and building robust applications that solve real problems.</p>
-                    </div>
-                </div>
-
-                <!-- Projects Section -->
-                <div id="projects" class="content-section">
-                    <div class="section-title">➤ PROJECTS</div>
-                    <div class="section-content">
-                        <div class="project-item">
-                            <div class="project-title">PROJECT ALPHA</div>
-                            <div class="project-description">
-                                A responsive e-commerce platform featuring advanced filtering, real-time inventory management, and secure payment integration. Built with modern web technologies.
-                            </div>
-                        </div>
-
-                        <div class="project-item">
-                            <div class="project-title">PROJECT BETA</div>
-                            <div class="project-description">
-                                Interactive data visualization dashboard that transforms complex datasets into actionable insights. Features real-time updates and custom analytics tools.
-                            </div>
-                        </div>
-
-                        <div class="project-item">
-                            <div class="project-title">PROJECT GAMMA</div>
-                            <div class="project-description">
-                                A collaborative productivity application with real-time synchronization, user authentication, and advanced workflow automation capabilities.
-                            </div>
-                        </div>
-
-                        <div class="project-item">
-                            <div class="project-title">PROJECT DELTA</div>
-                            <div class="project-description">
-                                Mobile-first social platform enabling seamless user interaction with intuitive design, notification systems, and content management features.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Resume Section -->
-                <div id="resume" class="content-section">
-                    <div class="section-title">➤ RESUME</div>
-                    <div class="section-content">
-                        <div class="info-box">
-                            <div class="info-box-title">TECHNICAL SKILLS</div>
-                        </div>
-                        
-                        <div class="skill-grid">
-                            <div class="skill-item">HTML5 / CSS3</div>
-                            <div class="skill-item">JavaScript</div>
-                            <div class="skill-item">React</div>
-                            <div class="skill-item">Node.js</div>
-                            <div class="skill-item">TypeScript</div>
-                            <div class="skill-item">Database Design</div>
-                            <div class="skill-item">API Development</div>
-                            <div class="skill-item">Version Control</div>
-                        </div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">EXPERIENCE</div>
-                            <p><strong>Senior Developer</strong> (2021 - Present)</p>
-                            <p>Led development of multiple client projects, mentored junior developers, and implemented best practices across the team.</p>
-
-                            <p style="margin-top: 15px;"><strong>Full Stack Developer</strong> (2019 - 2021)</p>
-                            <p>Developed full-stack web applications, managed databases, and optimized application performance.</p>
-
-                            <p style="margin-top: 15px;"><strong>Junior Developer</strong> (2018 - 2019)</p>
-                            <p>Started career building responsive websites and learning core development principles.</p>
-                        </div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">EDUCATION</div>
-                            <p><strong>Computer Science Degree</strong> - University Name (Graduation Year)</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Contact Section -->
-                <div id="contact" class="content-section">
-                    <div class="section-title">➤ CONTACT</div>
-                    <div class="section-content">
-                        <p>Feel free to reach out for collaboration opportunities, project inquiries, or just to say hello!</p>
-
-                        <div class="info-box">
-                            <div class="info-box-title">CONTACT INFORMATION</div>
-                            <p><strong>Email:</strong> your.email@example.com</p>
-                            <p><strong>Phone:</strong> (555) 123-4567</p>
-                            <p><strong>Location:</strong> Your City, Country</p>
-                        </div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">SOCIAL LINKS</div>
-                            <p>LinkedIn: linkedin.com/in/yourprofile</p>
-                            <p>GitHub: github.com/yourprofile</p>
-                            <p>Twitter: @yourhandle</p>
-                            <p>Portfolio: yourwebsite.com</p>
-                        </div>
-
-                        <div class="info-box">
-                            <div class="info-box-title">MESSAGE</div>
-                            <p>I&apos;m always interested in hearing about new projects and opportunities. Don&apos;t hesitate to get in touch!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="bpm-display">
+          <div class="bpm-pulse"></div>
+          128 BPM
         </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            ◆ PORTFOLIO v1.0 ◆ | SYSTEM ONLINE | READY FOR CONTACT | GAME OVER? PRESS START TO RESET
-        </div>
+      </div>
     </div>
 
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+    <!-- Big vinyl record -->
+    <div class="vinyl-hero-wrap fade-up delay-2">
+      <div class="vinyl-hero">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="vg" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="#222"/>
+              <stop offset="40%"  stop-color="#181818"/>
+              <stop offset="100%" stop-color="#111"/>
+            </radialGradient>
+            <radialGradient id="shine" cx="35%" cy="35%" r="65%">
+              <stop offset="0%"   stop-color="rgba(255,255,255,0.04)"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+            <!-- Gold outer ring gradient -->
+            <radialGradient id="ring" cx="50%" cy="50%" r="50%">
+              <stop offset="92%"  stop-color="transparent"/>
+              <stop offset="94%"  stop-color="rgba(201,168,76,0.6)"/>
+              <stop offset="96%"  stop-color="rgba(232,204,122,0.9)"/>
+              <stop offset="97%"  stop-color="rgba(201,168,76,0.6)"/>
+              <stop offset="99%"  stop-color="transparent"/>
+            </radialGradient>
+          </defs>
 
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
+          <!-- Outer groove area -->
+          <circle cx="200" cy="200" r="195" fill="url(#vg)"/>
 
-            // Update menu items
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(item => {
-                item.classList.remove('active');
-            });
+          <!-- Grooves (concentric circles) -->
+          <circle cx="200" cy="200" r="185" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.7"/>
+          <circle cx="200" cy="200" r="178" fill="none" stroke="rgba(255,255,255,0.02)"  stroke-width="0.7"/>
+          <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.7"/>
+          <circle cx="200" cy="200" r="162" fill="none" stroke="rgba(255,255,255,0.02)"  stroke-width="0.7"/>
+          <circle cx="200" cy="200" r="154" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.6"/>
+          <circle cx="200" cy="200" r="146" fill="none" stroke="rgba(255,255,255,0.02)"  stroke-width="0.6"/>
+          <circle cx="200" cy="200" r="138" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.6"/>
+          <circle cx="200" cy="200" r="130" fill="none" stroke="rgba(255,255,255,0.02)"  stroke-width="0.5"/>
+          <circle cx="200" cy="200" r="122" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.5"/>
+          <circle cx="200" cy="200" r="114" fill="none" stroke="rgba(255,255,255,0.02)"  stroke-width="0.5"/>
+          <circle cx="200" cy="200" r="106" fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.5"/>
+          <circle cx="200" cy="200" r="98"  fill="none" stroke="rgba(255,255,255,0.02)"  stroke-width="0.4"/>
+          <circle cx="200" cy="200" r="90"  fill="none" stroke="rgba(255,255,255,0.025)" stroke-width="0.4"/>
+          <circle cx="200" cy="200" r="82"  fill="none" stroke="rgba(255,255,255,0.02)"  stroke-width="0.4"/>
 
-            // Add active class to clicked menu item
-            event.target.classList.add('active');
-        }
+          <!-- Gold ring -->
+          <circle cx="200" cy="200" r="195" fill="url(#ring)"/>
 
-        // Keyboard navigation support
-        document.addEventListener('keydown', (e) => {
-            const menuItems = document.querySelectorAll('.menu-item');
-            const activeItem = document.querySelector('.menu-item.active');
-            const activeIndex = Array.from(menuItems).indexOf(activeItem);
+          <!-- Center label background -->
+          <circle cx="200" cy="200" r="75" fill="#2a1f0e"/>
+          <circle cx="200" cy="200" r="73" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
 
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                const nextIndex = (activeIndex + 1) % menuItems.length;
-                menuItems[nextIndex].click();
-                menuItems[nextIndex].focus();
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                const prevIndex = (activeIndex - 1 + menuItems.length) % menuItems.length;
-                menuItems[prevIndex].click();
-                menuItems[prevIndex].focus();
-            }
-        });
-    </script>
+          <!-- Label text (SVG text) -->
+          <text x="200" y="185" text-anchor="middle" font-family="'Bebas Neue', sans-serif"
+                font-size="14" letter-spacing="4" fill="#c9a84c">YOUR NAME</text>
+          <text x="200" y="200" text-anchor="middle" font-family="'Space Mono', monospace"
+                font-size="6.5" letter-spacing="2" fill="rgba(201,168,76,0.5)">PORTFOLIO VOL. I</text>
+          <line x1="165" y1="207" x2="235" y2="207" stroke="rgba(201,168,76,0.25)" stroke-width="0.5"/>
+          <text x="200" y="220" text-anchor="middle" font-family="'Space Mono', monospace"
+                font-size="6" letter-spacing="1.5" fill="rgba(201,168,76,0.4)">SIDE A</text>
+
+          <!-- Center hole -->
+          <circle cx="200" cy="200" r="7" fill="#0a0a0a"/>
+          <circle cx="200" cy="200" r="5" fill="none" stroke="rgba(201,168,76,0.2)" stroke-width="0.5"/>
+
+          <!-- Shine overlay -->
+          <circle cx="200" cy="200" r="195" fill="url(#shine)"/>
+        </svg>
+      </div>
+
+      <!-- Needle -->
+      <svg class="needle" viewBox="0 0 80 200" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="24" r="18" fill="none" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+        <circle cx="30" cy="24" r="6" fill="rgba(201,168,76,0.6)"/>
+        <line x1="30" y1="42" x2="42" y2="170" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
+        <circle cx="42" cy="172" r="3" fill="var(--gold)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SIDE A DIVIDER ────────────────────────────────────────── -->
+<div class="side-divider">
+  <span class="side-text">◀ SIDE A — INTRO &amp; SKILLS</span>
+  <span class="bpm-display"><div class="bpm-pulse"></div> 33⅓ RPM</span>
+  <span class="side-text">STEREO ▶</span>
+</div>
+
+<!-- ─── ABOUT ─────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Track 01</span>
+      <h2 class="section-title">ABOUT</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-vinyl-stack">
+        <div class="mini-vinyl"></div>
+        <div class="mini-vinyl"></div>
+        <div class="mini-vinyl"></div>
+      </div>
+
+      <div class="about-text">
+        <h3>The <span>Artist</span> Behind the Code</h3>
+        <p>
+          Hi, I'm <strong style="color:var(--gold);">Your Name</strong> — a passionate developer
+          and designer based in [Your City]. I create digital products that balance
+          technical precision with creative expression. Like a great record, every
+          project I ship is crafted with intention and care.
+        </p>
+        <p>
+          With [X] years of experience across full-stack development, UI design, and
+          product thinking, I've worked with startups and enterprises alike to build
+          things people genuinely enjoy using. My workflow: think deep, move fast,
+          iterate until it sings.
+        </p>
+        <p>
+          When I'm not coding, you'll find me hunting for rare records at local
+          markets, hiking mountain trails, or brewing the perfect cup of coffee.
+        </p>
+
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Years Exp.</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">20+</div>
+            <div class="stat-label">Projects</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">Clients</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">∞</div>
+            <div class="stat-label">Curiosity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS TRACK LIST ─────────────────────────────────────── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Track 02</span>
+      <h2 class="section-title">SKILLS</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="tracklist">
+
+      <div class="track">
+        <span class="track-num">01</span>
+        <div class="track-icon">⚛</div>
+        <div class="track-info">
+          <div class="track-name">React / Next.js</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:90%"></div></div>
+        </div>
+        <span class="track-duration">90%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">02</span>
+        <div class="track-icon">🐍</div>
+        <div class="track-info">
+          <div class="track-name">Python / Django</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:82%"></div></div>
+        </div>
+        <span class="track-duration">82%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">03</span>
+        <div class="track-icon">🎨</div>
+        <div class="track-info">
+          <div class="track-name">UI / UX Design</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:78%"></div></div>
+        </div>
+        <span class="track-duration">78%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">04</span>
+        <div class="track-icon">🗄</div>
+        <div class="track-info">
+          <div class="track-name">Node.js / Express</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:85%"></div></div>
+        </div>
+        <span class="track-duration">85%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">05</span>
+        <div class="track-icon">☁</div>
+        <div class="track-info">
+          <div class="track-name">AWS / Cloud</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:70%"></div></div>
+        </div>
+        <span class="track-duration">70%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">06</span>
+        <div class="track-icon">🐘</div>
+        <div class="track-info">
+          <div class="track-name">PostgreSQL / MongoDB</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:80%"></div></div>
+        </div>
+        <span class="track-duration">80%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">07</span>
+        <div class="track-icon">🐳</div>
+        <div class="track-info">
+          <div class="track-name">Docker / DevOps</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:72%"></div></div>
+        </div>
+        <span class="track-duration">72%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">08</span>
+        <div class="track-icon">🤖</div>
+        <div class="track-info">
+          <div class="track-name">AI / ML Integration</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:65%"></div></div>
+        </div>
+        <span class="track-duration">65%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">09</span>
+        <div class="track-icon">📱</div>
+        <div class="track-info">
+          <div class="track-name">TypeScript</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:88%"></div></div>
+        </div>
+        <span class="track-duration">88%</span>
+      </div>
+
+      <div class="track">
+        <span class="track-num">10</span>
+        <div class="track-icon">🎛</div>
+        <div class="track-info">
+          <div class="track-name">CSS / Animation</div>
+          <div class="track-bar"><div class="track-bar-fill" style="width:92%"></div></div>
+        </div>
+        <span class="track-duration">92%</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SIDE B DIVIDER ────────────────────────────────────────── -->
+<div class="side-divider">
+  <span class="side-text">◀ SIDE B — WORK &amp; EDUCATION</span>
+  <span class="bpm-display"><div class="bpm-pulse"></div> 45 RPM</span>
+  <span class="side-text">MONO ▶</span>
+</div>
+
+<!-- ─── EXPERIENCE ────────────────────────────────────────────── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Track 03</span>
+      <h2 class="section-title">EXPERIENCE</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2023 — Present</div>
+        <div class="timeline-role">Senior Frontend Engineer</div>
+        <div class="timeline-company">⬡ TechCorp Inc. — Remote</div>
+        <p class="timeline-desc">
+          Led the redesign of the company's core product dashboard, improving
+          load time by 40% and user retention by 22%. Architected a design
+          system used across three product lines and mentored a team of four
+          junior developers.
+        </p>
+        <div class="timeline-tags">
+          <span class="tag">React</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">Figma</span>
+          <span class="tag">GraphQL</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2021 — 2023</div>
+        <div class="timeline-role">Full-Stack Developer</div>
+        <div class="timeline-company">⬡ StartupLab — [City]</div>
+        <p class="timeline-desc">
+          Built and scaled two SaaS products from zero to production. Handled
+          everything from backend API design to deployment pipelines, serving
+          over 5,000 active users at peak.
+        </p>
+        <div class="timeline-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2020 — 2021</div>
+        <div class="timeline-role">Junior Developer &amp; Intern</div>
+        <div class="timeline-company">⬡ AgencyX — [City]</div>
+        <p class="timeline-desc">
+          Developed client-facing websites and internal tooling for a digital
+          agency. Collaborated closely with designers to turn Figma mocks into
+          pixel-perfect, performant frontends.
+        </p>
+        <div class="timeline-tags">
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">WordPress</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ──────────────────────────────────────────────── -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Track 04</span>
+      <h2 class="section-title">PROJECTS</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="albums-grid">
+
+      <!-- Album 1 -->
+      <div class="album-card">
+        <div class="album-art album-art-1">
+          <div class="album-label album-label-1">APP<br>001</div>
+        </div>
+        <div class="album-bottom">
+          <div class="album-title">Project Alpha</div>
+          <div class="album-sub">SaaS Dashboard · React + Node</div>
+        </div>
+        <div class="album-overlay">
+          <p style="font-size:0.72rem; color:rgba(245,240,232,0.7); line-height:1.7; margin-bottom:0.8rem;">
+            A real-time analytics platform with custom charting, team collaboration,
+            and role-based access control.
+          </p>
+          <div class="album-links">
+            <a href="#" class="album-link">Demo</a>
+            <a href="#" class="album-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Album 2 -->
+      <div class="album-card">
+        <div class="album-art album-art-2">
+          <div class="album-label album-label-2">APP<br>002</div>
+        </div>
+        <div class="album-bottom">
+          <div class="album-title">Project Beta</div>
+          <div class="album-sub">E-Commerce · Next.js + Stripe</div>
+        </div>
+        <div class="album-overlay">
+          <p style="font-size:0.72rem; color:rgba(245,240,232,0.7); line-height:1.7; margin-bottom:0.8rem;">
+            Full-featured online store with inventory management, payments,
+            and a custom CMS for content editors.
+          </p>
+          <div class="album-links">
+            <a href="#" class="album-link">Demo</a>
+            <a href="#" class="album-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Album 3 -->
+      <div class="album-card">
+        <div class="album-art album-art-3">
+          <div class="album-label album-label-3">APP<br>003</div>
+        </div>
+        <div class="album-bottom">
+          <div class="album-title">Project Gamma</div>
+          <div class="album-sub">AI Tool · Python + OpenAI</div>
+        </div>
+        <div class="album-overlay">
+          <p style="font-size:0.72rem; color:rgba(245,240,232,0.7); line-height:1.7; margin-bottom:0.8rem;">
+            An AI-powered writing assistant that helps teams create documentation
+            faster with contextual suggestions.
+          </p>
+          <div class="album-links">
+            <a href="#" class="album-link">Demo</a>
+            <a href="#" class="album-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Album 4 -->
+      <div class="album-card">
+        <div class="album-art album-art-4">
+          <div class="album-label album-label-4">APP<br>004</div>
+        </div>
+        <div class="album-bottom">
+          <div class="album-title">Project Delta</div>
+          <div class="album-sub">Mobile App · React Native</div>
+        </div>
+        <div class="album-overlay">
+          <p style="font-size:0.72rem; color:rgba(245,240,232,0.7); line-height:1.7; margin-bottom:0.8rem;">
+            A habit-tracking app with social accountability features,
+            streak visualizations, and push notifications.
+          </p>
+          <div class="album-links">
+            <a href="#" class="album-link">Demo</a>
+            <a href="#" class="album-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Album 5 -->
+      <div class="album-card">
+        <div class="album-art album-art-5">
+          <div class="album-label album-label-5">APP<br>005</div>
+        </div>
+        <div class="album-bottom">
+          <div class="album-title">Project Epsilon</div>
+          <div class="album-sub">API Service · FastAPI + Redis</div>
+        </div>
+        <div class="album-overlay">
+          <p style="font-size:0.72rem; color:rgba(245,240,232,0.7); line-height:1.7; margin-bottom:0.8rem;">
+            High-performance REST API serving 1M+ requests per day with
+            caching, rate limiting, and auto-scaling.
+          </p>
+          <div class="album-links">
+            <a href="#" class="album-link">Demo</a>
+            <a href="#" class="album-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Album 6 -->
+      <div class="album-card">
+        <div class="album-art album-art-6">
+          <div class="album-label album-label-6">APP<br>006</div>
+        </div>
+        <div class="album-bottom">
+          <div class="album-title">Project Zeta</div>
+          <div class="album-sub">Design System · Storybook</div>
+        </div>
+        <div class="album-overlay">
+          <p style="font-size:0.72rem; color:rgba(245,240,232,0.7); line-height:1.7; margin-bottom:0.8rem;">
+            An open-source component library with 60+ accessible components,
+            theming support, and comprehensive documentation.
+          </p>
+          <div class="album-links">
+            <a href="#" class="album-link">Demo</a>
+            <a href="#" class="album-link">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── EDUCATION ─────────────────────────────────────────────── -->
+<section id="education">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Track 05</span>
+      <h2 class="section-title">EDUCATION</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="edu-grid">
+
+      <div class="record-label-card">
+        <div class="card-vinyl">
+          <div class="card-vinyl-inner"></div>
+          <div class="card-vinyl-center"></div>
+        </div>
+        <div class="edu-info">
+          <div class="edu-degree">BSc Computer Science</div>
+          <div class="edu-school">University of [Your University]</div>
+          <div class="edu-year">2017 — 2021 · First Class Honours</div>
+        </div>
+      </div>
+
+      <div class="record-label-card">
+        <div class="card-vinyl">
+          <div class="card-vinyl-inner"></div>
+          <div class="card-vinyl-center"></div>
+        </div>
+        <div class="edu-info">
+          <div class="edu-degree">AWS Certified Developer</div>
+          <div class="edu-school">Amazon Web Services</div>
+          <div class="edu-year">2022 · Associate Level</div>
+        </div>
+      </div>
+
+      <div class="record-label-card">
+        <div class="card-vinyl">
+          <div class="card-vinyl-inner"></div>
+          <div class="card-vinyl-center"></div>
+        </div>
+        <div class="edu-info">
+          <div class="edu-degree">Professional UX Design</div>
+          <div class="edu-school">Google / Coursera</div>
+          <div class="edu-year">2021 · Certificate</div>
+        </div>
+      </div>
+
+      <div class="record-label-card">
+        <div class="card-vinyl">
+          <div class="card-vinyl-inner"></div>
+          <div class="card-vinyl-center"></div>
+        </div>
+        <div class="edu-info">
+          <div class="edu-degree">Machine Learning Specialization</div>
+          <div class="edu-school">Stanford Online / Coursera</div>
+          <div class="edu-year">2023 · 3-Course Certificate</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ───────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Track 06</span>
+      <h2 class="section-title">CONTACT</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="contact-wrap">
+      <div class="contact-vinyl-wrap">
+        <div class="contact-vinyl">
+          <div class="contact-vinyl-disk">
+            <div class="contact-vinyl-label">
+              <span>CONTACT</span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-text">
+        <h3>LET'S MAKE<br /><em>SOMETHING</em><br />TOGETHER</h3>
+        <p>
+          Whether you have a project in mind, want to collaborate, or just
+          want to say hello — drop me a line. I respond to every message.
+        </p>
+
+        <div class="contact-links">
+          <a href="mailto:hello@yourname.com" class="contact-link">
+            <div class="contact-link-icon">✉</div>
+            hello@yourname.com
+          </a>
+          <a href="https://linkedin.com/in/yourname" class="contact-link" target="_blank">
+            <div class="contact-link-icon">in</div>
+            linkedin.com/in/yourname
+          </a>
+          <a href="https://github.com/yourname" class="contact-link" target="_blank">
+            <div class="contact-link-icon">⌥</div>
+            github.com/yourname
+          </a>
+          <a href="https://twitter.com/yourname" class="contact-link" target="_blank">
+            <div class="contact-link-icon">𝕏</div>
+            @yourname
+          </a>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <a href="mailto:hello@yourname.com" class="btn btn-primary">◎ Send a Message</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────── -->
+<footer>
+  <p class="footer-copy">
+    © 2025 Your Name &nbsp;·&nbsp; Designed &amp; coded with ♪
+  </p>
+  <div class="footer-grooves">
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+    <div class="footer-groove"></div>
+  </div>
+  <p class="footer-copy">All rights reserved.</p>
+</footer>
+
+<!-- ─── MINIMAL JS: cursor + intersection observer ───────────── -->
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+
+  // Grow cursor on interactive elements
+  document.querySelectorAll('a, button, .track, .album-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+      cursor.style.borderColor = 'rgba(201,168,76,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursor.style.borderColor = 'rgba(201,168,76,0.5)';
+    });
+  });
+
+  // Intersection observer for skill bars
+  const bars = document.querySelectorAll('.track-bar-fill');
+  const widths = Array.from(bars).map(b => b.style.width);
+  bars.forEach(b => b.style.width = '0');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(bars).indexOf(entry.target);
+        entry.target.style.width = widths[idx];
+      }
+    });
+  }, { threshold: 0.3 });
+
+  bars.forEach(b => observer.observe(b));
+</script>
 </body>
 </html>
-
