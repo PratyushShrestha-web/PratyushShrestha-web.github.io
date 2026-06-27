@@ -68,7 +68,9 @@ body{
 /* CLICK TO START */
 #enter{
   position:absolute;
-  bottom:15%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
   font-size:12px;
   letter-spacing:2px;
   color:rgba(0,0,0,0.8);
@@ -462,6 +464,7 @@ body{
 
   #enter{
     font-size:10px;
+    padding:10px 20px;
   }
 
   #gameTitle{
@@ -494,6 +497,11 @@ body{
 
   #gameTitle{
     font-size:18px;
+  }
+
+  #enter{
+    font-size:9px;
+    padding:8px 16px;
   }
 
   .modal{
@@ -596,8 +604,8 @@ let modalOpen = false;
 const sectionData = {
   about: {
     title: 'ABOUT ME',
-    content: `<p>Welcome to my digital portfolio. I'm a full-stack developer passionate about creating immersive digital experiences. With a background in both frontend and backend technologies, I focus on building elegant solutions to complex problems.</p>
-    <p style="margin-top:15px;">My journey in tech began with a curiosity about how things work, which evolved into a career dedicated to solving complex problems through code and creative design. I believe in the power of technology to transform ideas into reality.</p>
+    content: `<p>Welcome to my digital portfolio. I'm a full-stack developer passionate about creating immersive digital experiences. With a background in both frontend and backend technologies, I focus on building seamless, engaging user experiences that combine beautiful design with robust functionality.</p>
+    <p style="margin-top:15px;">My journey in tech began with a curiosity about how things work, which evolved into a career dedicated to solving complex problems through code and creative design. I believe in the power of technology to create meaningful experiences.</p>
     <p style="margin-top:15px;">When I'm not coding, you can find me exploring new design trends, playing games, or contributing to open-source projects.</p>`
   },
   qualification: {
@@ -612,7 +620,7 @@ const sectionData = {
     title: 'PROJECTS',
     content: `<p><strong>Project Alpha</strong> - An immersive 3D web experience using Three.js and WebGL. Created interactive particle systems and real-time rendering with advanced shaders.</p>
     <p style="margin-top:15px;"><strong>Project Beta</strong> - Full-stack e-commerce platform with real-time features. Built with React, Node.js, and MongoDB. Implemented payment integration and user authentication.</p>
-    <p style="margin-top:15px;"><strong>Project Gamma</strong> - Game menu system with interactive animations and smooth transitions. Created with vanilla JavaScript and CSS animations for a polished experience.</p>
+    <p style="margin-top:15px;"><strong>Project Gamma</strong> - Game menu system with interactive animations and smooth transitions. Created with vanilla JavaScript and CSS animations for a polished gaming experience.</p>
     <p style="margin-top:15px;"><strong>Project Delta</strong> - AI-powered content management system with advanced search and filtering capabilities. Built REST APIs and implemented real-time notifications.</p>`
   },
   contact: {
