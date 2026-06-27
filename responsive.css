@@ -1,0 +1,78 @@
+/* ─── Tablet ─── */
+@media (max-width: 1024px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+  }
+
+  .hero__scroll-hint {
+    display: none;
+  }
+
+  .work__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
+
+  .cursor,
+  .cursor__ring {
+    display: none;
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .nav__status {
+    display: none;
+  }
+
+  .hero__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+
+  .work__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .contact__big-link {
+    font-size: var(--text-3xl);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .split-char {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

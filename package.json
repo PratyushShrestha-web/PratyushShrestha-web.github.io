@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Creative developer portfolio — dark, immersive, motion-rich",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "start": "node scripts/dev-server.js"
+  },
+  "keywords": ["portfolio", "creative-developer", "webgl", "threejs", "gsap"],
+  "author": "Alex Mora",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
