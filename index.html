@@ -12,14 +12,15 @@
   <title>Alex Mora — Creative Developer</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/src/styles/main.css" />
-
-  <!-- Preconnect for fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" />
+
+  <!-- Styles (single bundled file — no @import chain) -->
+  <link rel="stylesheet" href="./src/styles/bundle.css" />
 </head>
 <body>
   <!-- Three.js canvas layer -->
@@ -38,6 +39,6 @@
   </script>
 
   <!-- Main script (ES modules) -->
-  <script type="module" src="/src/js/main.js"></script>
+  <script type="module" src="./src/js/main.js"></script>
 </body>
 </html>
