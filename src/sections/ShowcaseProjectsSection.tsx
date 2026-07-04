@@ -18,37 +18,15 @@ interface Project {
  */
 const PROJECTS: Project[] = [
   {
-    title: 'Project Name One',
+    title: 'Munavya',
     description:
-      'A short, punchy description of what this project does and the problem it solves. Swap this out with your real project.',
-    tech: ['Python', 'scikit-learn', 'Pandas'],
-    liveUrl: 'https://your-live-demo-link.com',
-    githubUrl: 'https://github.com/pratyushshrestha/project-one',
+      'A MERN-Based Platform for Business Promotion, Profit & Loss Analysis, and Smart Insights',
+    tech: ['React', 'Express.js', 'Mongodb','Nodejs',],
+    liveUrl: 'https://munavya.vercel.app/',
+    githubUrl: 'https://github.com/PratyushShrestha-web/Munavya',
   },
-  {
-    title: 'Project Name Two',
-    description:
-      'Another project description. Keep it to 1-2 sentences focused on the outcome, not just the tech stack.',
-    tech: ['Java', 'MySQL'],
-    liveUrl: 'https://your-live-demo-link.com',
-    githubUrl: 'https://github.com/pratyushshrestha/project-two',
-  },
-   {
-    title: 'Project Name Two',
-    description:
-      'Another project description. Keep it to 1-2 sentences focused on the outcome, not just the tech stack.',
-    tech: ['Java', 'MySQL'],
-    liveUrl: 'https://your-live-demo-link.com',
-    githubUrl: 'https://github.com/pratyushshrestha/project-two',
-  },
-   {
-    title: 'Project Name Two',
-    description:
-      'Another project description. Keep it to 1-2 sentences focused on the outcome, not just the tech stack.',
-    tech: ['Java', 'MySQL'],
-    liveUrl: 'https://your-live-demo-link.com',
-    githubUrl: 'https://github.com/pratyushshrestha/project-two',
-  },
+
+  
 ];
 
 function TechTag({ label }: { label: string }) {
