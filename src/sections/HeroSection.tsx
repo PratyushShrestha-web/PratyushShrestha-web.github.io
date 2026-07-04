@@ -90,7 +90,7 @@ export default function HeroSection() {
             className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[160px] sm:max-w-[220px] md:max-w-[260px]"
             style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
           >
-            Computer Science student building modern web and mobile applications with React, Flutter, TypeScript, and Python. Passionate about AI, problem-solving, and crafting exceptional digital experiences.
+              an aspiring ai/ml engineer building intelligent systems, one line of code at a time
           </p>
         </FadeIn>
         <FadeIn delay={0.5} y={20}>
