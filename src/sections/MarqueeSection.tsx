@@ -54,11 +54,11 @@ function Chip({ tag }: { tag: Tag }) {
   const Icon = tag.icon;
   return (
     <div
-      className="flex items-center gap-3 rounded-2xl border border-[#D7E2EA]/15 bg-[#141414] flex-shrink-0 px-8"
-      style={{ height: '90px' }}
+      className="flex items-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl border border-[#D7E2EA]/15 bg-[#141414] flex-shrink-0 px-3 sm:px-6 md:px-8"
+      style={{ height: 'clamp(60px, 12vw, 90px)' }}
     >
-      <Icon className="text-[#BBCCD7] flex-shrink-0" size={26} strokeWidth={1.75} />
-      <span className="text-[#D7E2EA] uppercase tracking-wide font-medium text-sm sm:text-base whitespace-nowrap">
+      <Icon className="text-[#BBCCD7] flex-shrink-0" size={20} strokeWidth={1.75} />
+      <span className="text-[#D7E2EA] uppercase tracking-wide font-medium text-xs sm:text-sm md:text-base whitespace-nowrap">
         {tag.label}
       </span>
     </div>
@@ -86,13 +86,13 @@ export default function MarqueeSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10"
+      className="bg-[#0C0C0C] pt-16 sm:pt-24 md:pt-32 lg:pt-40 pb-8 sm:pb-10 px-3 sm:px-4"
       style={{ overflowX: 'clip' }}
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2 sm:gap-3">
         {/* Row 1 - moves right on scroll */}
         <div
-          className="flex gap-3"
+          className="flex gap-2 sm:gap-3"
           style={{
             willChange: 'transform',
             transform: `translateX(${offset - 200}px)`,
@@ -105,7 +105,7 @@ export default function MarqueeSection() {
 
         {/* Row 2 - moves left on scroll */}
         <div
-          className="flex gap-3"
+          className="flex gap-2 sm:gap-3"
           style={{
             willChange: 'transform',
             transform: `translateX(${-(offset - 200)}px)`,

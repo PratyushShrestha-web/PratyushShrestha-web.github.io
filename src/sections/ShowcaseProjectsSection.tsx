@@ -40,11 +40,11 @@ function TechTag({ label }: { label: string }) {
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <FadeIn delay={index * 0.1}>
-      <div className="flex flex-col gap-5 rounded-[30px] sm:rounded-[36px] border-2 border-[#D7E2EA] p-6 sm:p-8 md:p-10 h-full">
+      <div className="flex flex-col gap-4 sm:gap-5 rounded-2xl sm:rounded-[30px] md:rounded-[36px] border-2 border-[#D7E2EA] p-4 sm:p-6 md:p-8 lg:p-10 h-full">
         <div className="flex items-start justify-between gap-4">
           <span
             className="hero-heading font-black leading-none"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
+            style={{ fontSize: 'clamp(1.75rem, 4vw, 3.5rem)' }}
           >
             {String(index + 1).padStart(2, '0')}
           </span>
@@ -54,14 +54,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               target="_blank"
               rel="noreferrer noopener"
               aria-label={`${project.title} on GitHub`}
-              className="w-11 h-11 rounded-full border border-[#D7E2EA]/30 flex items-center justify-center text-[#BBCCD7] transition-colors duration-200 hover:bg-[#D7E2EA]/10 flex-shrink-0"
+              className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-[#D7E2EA]/30 flex items-center justify-center text-[#BBCCD7] transition-colors duration-200 hover:bg-[#D7E2EA]/10 flex-shrink-0"
             >
-              <Github size={20} strokeWidth={1.5} />
+              <Github size={18} strokeWidth={1.5} className="sm:w-5 sm:h-5" />
             </a>
           )}
         </div>
 
-        <h3 className="text-[#D7E2EA] uppercase font-medium text-xl sm:text-2xl">
+        <h3 className="text-[#D7E2EA] uppercase font-medium text-lg sm:text-xl md:text-2xl">
           {project.title}
         </h3>
 
@@ -87,18 +87,18 @@ export default function ShowcaseProjectsSection() {
   return (
     <section
       id="projects"
-      className="relative bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32"
+      className="relative bg-[#0C0C0C] rounded-t-3xl sm:rounded-t-[40px] md:rounded-t-[50px] lg:rounded-t-[60px] -mt-8 sm:-mt-10 md:-mt-12 lg:-mt-14 z-10 px-4 sm:px-8 md:px-10 py-16 sm:py-20 md:py-28 lg:py-32"
     >
       <FadeIn delay={0}>
         <h2
-          className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-16 sm:mb-20 md:mb-28"
-          style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+          className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-12 sm:mb-16 md:mb-24 lg:mb-28"
+          style={{ fontSize: 'clamp(2.5rem, 10vw, 160px)' }}
         >
           Projects
         </h2>
       </FadeIn>
 
-      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
         {PROJECTS.map((project, i) => (
           <ProjectCard key={project.title} project={project} index={i} />
         ))}

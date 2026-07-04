@@ -18,12 +18,12 @@ export default function HeroSection() {
     >
       {/* Navbar */}
       <FadeIn delay={0} y={-20} as="nav">
-        <div className="flex flex-wrap justify-between gap-2 px-3 sm:px-6 md:px-10 pt-4 sm:pt-6 md:pt-8">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap justify-center sm:justify-between gap-2 sm:gap-3 px-4 sm:px-6 md:px-10 pt-4 sm:pt-6 md:pt-8">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-lg lg:text-[1.4rem] transition-opacity duration-200 hover:opacity-70"
+              className="text-[#D7E2EA] font-medium uppercase tracking-wider text-xs sm:text-sm md:text-base lg:text-lg transition-opacity duration-200 hover:opacity-70 text-center sm:text-left"
             >
               {link.label}
             </a>
@@ -32,9 +32,9 @@ export default function HeroSection() {
       </FadeIn>
 
       {/* Hero heading */}
-      <div className="overflow-hidden mt-4 sm:mt-6 md:mt-4 lg:-mt-5 w-full px-2 sm:px-4">
+      <div className="overflow-hidden mt-6 sm:mt-6 md:mt-4 lg:-mt-5 w-full px-3 sm:px-4">
         <FadeIn delay={0.15} y={40}>
-          <h1 className="hero-heading font-black uppercase tracking-tight leading-tight sm:leading-none whitespace-normal sm:whitespace-normal w-full text-[8vw] sm:text-[10vw] md:text-[12vw] lg:text-[14vw]">
+          <h1 className="hero-heading font-black uppercase tracking-tight leading-tight sm:leading-none whitespace-normal sm:whitespace-normal w-full text-[10vw] sm:text-[9vw] md:text-[11vw] lg:text-[12vw]">
             Hi, i&apos;m pratyush
           </h1>
         </FadeIn>
@@ -46,7 +46,7 @@ export default function HeroSection() {
         strength={3}
         activeTransition="transform 0.3s ease-out"
         inactiveTransition="transform 0.6s ease-in-out"
-        className="absolute left-1/2 -translate-x-1/2 z-10 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 w-[200px] sm:w-[280px] md:w-[360px] lg:w-[440px] xl:w-[520px]"
+        className="absolute left-1/2 -translate-x-1/2 z-10 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0 w-[150px] sm:w-[260px] md:w-[340px] lg:w-[440px] xl:w-[520px]"
       >
         <FadeIn delay={0.6} y={30}>
           <svg
@@ -83,13 +83,13 @@ export default function HeroSection() {
       </Magnet>
 
       {/* Bottom bar */}
-      <div className="mt-auto flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-2 pb-4 sm:pb-7 md:pb-8 lg:pb-10 px-3 sm:px-6 md:px-10 relative z-20">
+      <div className="mt-auto flex flex-col sm:flex-row justify-between items-center sm:items-end gap-4 sm:gap-2 pb-4 sm:pb-7 md:pb-8 lg:pb-10 px-4 sm:px-6 md:px-10 relative z-20">
         <FadeIn delay={0.35} y={20}>
           <p
-            className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[140px] sm:max-w-[160px] md:max-w-[220px] lg:max-w-[260px]"
-            style={{ fontSize: 'clamp(0.65rem, 1.2vw, 1.5rem)' }}
+            className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug text-center sm:text-left max-w-[200px] sm:max-w-[160px] md:max-w-[220px] lg:max-w-[260px]"
+            style={{ fontSize: 'clamp(0.65rem, 2vw, 1.5rem)' }}
           >
-              an aspiring ai/ml engineer building intelligent systems, one line of code at a time
+            an aspiring ai/ml engineer building intelligent systems, one line of code at a time
           </p>
         </FadeIn>
         <FadeIn delay={0.5} y={20}>
