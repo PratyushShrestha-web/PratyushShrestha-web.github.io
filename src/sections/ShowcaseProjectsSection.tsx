@@ -33,6 +33,22 @@ const PROJECTS: Project[] = [
     liveUrl: 'https://your-live-demo-link.com',
     githubUrl: 'https://github.com/pratyushshrestha/project-two',
   },
+   {
+    title: 'Project Name Two',
+    description:
+      'Another project description. Keep it to 1-2 sentences focused on the outcome, not just the tech stack.',
+    tech: ['Java', 'MySQL'],
+    liveUrl: 'https://your-live-demo-link.com',
+    githubUrl: 'https://github.com/pratyushshrestha/project-two',
+  },
+   {
+    title: 'Project Name Two',
+    description:
+      'Another project description. Keep it to 1-2 sentences focused on the outcome, not just the tech stack.',
+    tech: ['Java', 'MySQL'],
+    liveUrl: 'https://your-live-demo-link.com',
+    githubUrl: 'https://github.com/pratyushshrestha/project-two',
+  },
 ];
 
 function TechTag({ label }: { label: string }) {
