@@ -2,7 +2,7 @@ interface ContactButtonProps {
   className?: string;
 }
 
-const EMAIL = 'pratyush.shrestha@email.com';
+const EMAIL = 'pratyush.stha.np@gmail.com';
 
 export default function ContactButton({ className = '' }: ContactButtonProps) {
   return (
