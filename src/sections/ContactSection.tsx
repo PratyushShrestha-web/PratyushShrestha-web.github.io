@@ -29,7 +29,8 @@ export default function ContactSection() {
 
       <FadeIn delay={0.1} y={20}>
         <p className="text-[#D7E2EA] font-light max-w-xl leading-relaxed opacity-70">
-          Available immediately for an on-site internship in Dharan, and flexible with working hours.
+         Open to internships, collaborations, and exciting opportunities. Let's start the conversation.
+
         </p>
       </FadeIn>
 
