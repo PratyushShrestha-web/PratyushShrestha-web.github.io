@@ -15,14 +15,14 @@ const WORK_ITEMS: WorkItem[] = [
     title: 'GitHub',
     meta: 'github.com/pratyushshrestha',
     description: 'Browse class assignments, small Python scripts, and self-driven experiments applying data structures and OOP concepts.',
-    href: 'https://github.com/pratyushshrestha',
+    href: 'https://github.com/PratyushShrestha-web',
   },
   {
     icon: Linkedin,
     title: 'LinkedIn',
     meta: 'linkedin.com/in/pratyushshrestha',
     description: 'Connect with me professionally to talk AI/ML, robotics, or opportunities to collaborate.',
-    href: 'https://linkedin.com/in/pratyushshrestha',
+    href: 'https://www.linkedin.com/in/pratyush-shrestha-239384341/',
   },
   {
     icon: FolderGit2,
