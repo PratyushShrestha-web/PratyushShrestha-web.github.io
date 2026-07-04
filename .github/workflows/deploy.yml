@@ -31,11 +31,13 @@ jobs:
         run: npm ci
 
       - name: Build
-        # Sets the base path to /<repo-name>/ so assets resolve correctly ok man
-        # on https://<user>.github.io/<repo-name>/
+        # Project repos (my-repo) get served at /my-repo/, so they need that
+        # base path baked into asset URLs. But a <username>.github.io repo
+        # (a "user/organization site") is served at the domain root, so it
+        # must build with base '/' instead.
         run: npm run build
         env:
-          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_BASE_PATH: ${{ endsWith(github.event.repository.name, '.github.io') && '/' || format('/{0}/', github.event.repository.name) }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -52,6 +54,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
