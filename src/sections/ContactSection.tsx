@@ -3,13 +3,13 @@ import FadeIn from '../components/FadeIn';
 import ContactButton from '../components/ContactButton';
 
 const CONTACT_INFO = [
-  { icon: Mail, label: 'pratyush.shrestha@email.com', href: 'mailto:pratyush.shrestha@email.com' },
+  { icon: Mail, label: 'pratyush.stha.np@gmail.com', href: 'mailto:pratyush.stha.np@gmail.com' },
   
 ];
 
 const SOCIAL_LINKS = [
-  { icon: Github, href: 'https://github.com/pratyushshrestha', label: 'GitHub' },
-  { icon: Linkedin, href: 'https://linkedin.com/in/pratyushshrestha', label: 'LinkedIn' },
+  { icon: Github, href: 'https://github.com/PratyushShrestha-web', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/pratyush-shrestha-239384341/', label: 'LinkedIn' },
 ];
 
 export default function ContactSection() {
