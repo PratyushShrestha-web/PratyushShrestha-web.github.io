@@ -4,8 +4,7 @@ import ContactButton from '../components/ContactButton';
 
 const CONTACT_INFO = [
   { icon: Mail, label: 'pratyush.shrestha@email.com', href: 'mailto:pratyush.shrestha@email.com' },
-  { icon: Phone, label: '+977-98XXXXXXXX', href: 'tel:+97798XXXXXXXX' },
-  { icon: MapPin, label: 'Dharan, Nepal', href: undefined },
+  
 ];
 
 const SOCIAL_LINKS = [
