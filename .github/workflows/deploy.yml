@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        # Sets the base path to /<repo-name>/ so assets resolve correctly
+        # Sets the base path to /<repo-name>/ so assets resolve correctly ok man
         # on https://<user>.github.io/<repo-name>/
         run: npm run build
         env:
