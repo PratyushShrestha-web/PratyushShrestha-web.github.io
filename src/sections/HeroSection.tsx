@@ -35,7 +35,7 @@ export default function HeroSection() {
       <div className="overflow-hidden mt-4 xs:mt-6 sm:mt-6 md:mt-4 lg:-mt-5 w-full px-2 xs:px-3 sm:px-4">
         <FadeIn delay={0.15} y={40}>
           <h1 className="hero-heading font-black uppercase tracking-tight leading-tight whitespace-normal w-full text-[8vw] xs:text-[8.5vw] sm:text-[9vw] md:text-[11vw] lg:text-[10vw]">
-            Hi, i&apos;m pratyush
+            Hi, i&apos;m pratyush shrestha
           </h1>
         </FadeIn>
       </div>
