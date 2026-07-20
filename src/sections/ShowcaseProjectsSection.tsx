@@ -18,14 +18,6 @@ interface Project {
  */
 const PROJECTS: Project[] = [
   {
-    title: 'Munavya',
-    description:
-      'A MERN-Based Platform for Business Promotion, Profit & Loss Analysis, and Smart Insights',
-    tech: ['React', 'Express.js', 'Mongodb','Nodejs',],
-    liveUrl: 'https://munavya.vercel.app/',
-    githubUrl: 'https://github.com/PratyushShrestha-web/Munavya',
-  },
-{
   title: 'V6 Turbo AI',
   description:
     'A Full-Stack Formula 1 Intelligence Platform that processes live race data, analyzes FIA race-control events, visualizes circuits and championship standings, and generates AI-powered race reports.',
@@ -33,6 +25,15 @@ const PROJECTS: Project[] = [
   liveUrl: '',
   githubUrl: 'https://github.com/PratyushShrestha-web/f1-AI-Summarizer',
 },
+  {
+    title: 'Munavya',
+    description:
+      'A MERN-Based Platform for Business Promotion, Profit & Loss Analysis, and Smart Insights',
+    tech: ['React', 'Express.js', 'Mongodb','Nodejs',],
+    liveUrl: 'https://munavya.vercel.app/',
+    githubUrl: 'https://github.com/PratyushShrestha-web/Munavya',
+  },
+
   
 ];
 
