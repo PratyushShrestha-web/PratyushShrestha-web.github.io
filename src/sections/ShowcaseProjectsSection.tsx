@@ -22,7 +22,7 @@ const PROJECTS: Project[] = [
   description:
     'A Full-Stack Formula 1 Intelligence Platform that processes live race data, analyzes FIA race-control events, visualizes circuits and championship standings, and generates AI-powered race reports.',
   tech: ['Python', 'Flask', 'Gemini API', 'OpenF1 API', 'JavaScript', 'Leaflet'],
-  liveUrl: '',
+  liveUrl: 'https://f1-ai-summarizer.onrender.com/',
   githubUrl: 'https://github.com/PratyushShrestha-web/f1-AI-Summarizer',
 },
  
